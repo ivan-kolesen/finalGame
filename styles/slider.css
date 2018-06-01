@@ -1,0 +1,96 @@
+.wrapper {
+	margin: 0 auto;
+	overflow: hidden;
+	width: 900px;
+	height: 500px;
+	margin-top: 50px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, .7);
+	-webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .7);
+	-moz-box-shadow: 0 0 20px rgba(0, 0, 0, .7);
+	-o-box-shadow: 0 0 20px rgba(0, 0, 0, .7);
+}
+.wrapper > input {
+	display: none;
+}
+.wrapper .controls {
+	position: absolute;
+}
+.wrapper label {
+	position: relative;
+	cursor: pointer;
+	display: inline-block;
+	width: 11px;
+	height: 11px;
+	margin: 25px 12px 0 15px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+}
+.wrapper label:hover,
+#img1:checked ~ .controls label:nth-of-type(1),
+#img2:checked ~ .controls label:nth-of-type(2),
+#img3:checked ~ .controls label:nth-of-type(3),
+#img4:checked ~ .controls label:nth-of-type(4),
+#img5:checked ~ .controls label:nth-of-type(5),
+#img6:checked ~ .controls label:nth-of-type(6),
+#img7:checked ~ .controls label:nth-of-type(7) {
+	background: #b3af46;
+}
+.wrapper label:after {
+	border: 2px solid #fff;
+	content: " ";
+	display: block;
+	width: 15px;
+	height: 15px;
+	left: -4px;
+	position: absolute;
+	top: -4px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+}
+.slider {
+	background-color: #b3af46;
+	width: inherit;
+	height: inherit;
+	overflow: hidden;
+	position: relative;
+}
+.images {
+	position: absolute;
+	width: inherit;
+	height: inherit;
+	opacity: 0;
+	z-index: 0;
+	transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+	-webkit-transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+	-moz-transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+	-o-transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+}
+.img1 { background-image: url(../img/background.jpg); }
+.img2 { background-image: url(../img/background.jpg); }
+.img3 { background-image: url(../img/background.jpg); }
+.img4 { background-image: url(../img/background.jpg); }
+.img5 { background-image: url(../img/background.jpg); }
+.img6 { background-image: url(../img/background.jpg); }
+.img7 { background-image: url(../img/background.jpg); }
+#img1:checked ~ .slider > .img1,
+#img2:checked ~ .slider > .img2,
+#img3:checked ~ .slider > .img3,
+#img4:checked ~ .slider > .img4,
+#img5:checked ~ .slider > .img5,
+#img6:checked ~ .slider > .img6,
+#img7:checked ~ .slider > .img7{
+	opacity: 1;
+	z-index: 1;
+	transform: scale(1);
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-o-transform: scale(1);
+}
