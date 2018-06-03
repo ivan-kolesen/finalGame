@@ -8,6 +8,7 @@
 	-webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .7);
 	-moz-box-shadow: 0 0 20px rgba(0, 0, 0, .7);
 	-o-box-shadow: 0 0 20px rgba(0, 0, 0, .7);
+	border: white 1px solid;
 }
 .wrapper > input {
 	display: none;
@@ -52,7 +53,7 @@
 	-o-border-radius: 50%;
 }
 .slider {
-	background-color: #b3af46;
+	background-color: #000000;
 	width: inherit;
 	height: inherit;
 	overflow: hidden;
@@ -72,11 +73,12 @@
 	-webkit-transition: transform ease-in-out .5s, opacity ease-in-out .5s;
 	-moz-transition: transform ease-in-out .5s, opacity ease-in-out .5s;
 	-o-transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+	background-size: cover;
 }
-.img1 { background-image: url(../img/background.jpg); }
-.img2 { background-image: url(../img/background.jpg); }
-.img3 { background-image: url(../img/background.jpg); }
-.img4 { background-image: url(../img/background.jpg); }
+.img1 { background-image: url(../img/arena1.jpg); }
+.img2 { background-image: url(../img/arena2.png); }
+.img3 { background-image: url(../img/arena3.png); }
+.img4 { background-image: url(../img/arena4.png); }
 .img5 { background-image: url(../img/background.jpg); }
 .img6 { background-image: url(../img/background.jpg); }
 .img7 { background-image: url(../img/background.jpg); }
@@ -94,3 +96,4 @@
 	-moz-transform: scale(1);
 	-o-transform: scale(1);
 }
+

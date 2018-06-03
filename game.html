@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="styles/gameStyle.css">
+  <title>Game</title>
+</head>
+<body>
+  <section class="regPage">
+    <h2>PLAY THE GAME!</h2>
+    <form onsubmit="return false">
+      <label>NAME:</label>
+      <input id="playerName" type="text" placeholder="*your name" value="ivan" required>
+      <button id="btnStart" type="submit">START!</button>
+    </form>
+  </section>
+  <section class="gamePage">
+    <div class="fighterNames">
+      <h3 class="playerName"></h3>
+      <h3 class="monsterName"></h3>
+    </div>
+    <div class="fighterHealthes">
+      <div class="fighterHealth">
+        <div class="playerHealthRemain"></div>
+      </div>
+      <div class="fighterHealth monsterHealth">
+        <div class="monsterHealthRemain"></div>
+      </div>
+    </div>
+    <form>
+      <button id="btnChooseSpell" type="button">Choose spell!</button>
+    </form>
+    <div class="playerImage"></div>
+    <div class="monsterImage"></div>
+  </section>
+  <section class="scoresPage">
+  </section>
+  <section class="spellPage">
+        <img class="spellType" src="img/sword.png">
+        <img class="spellType" src="img/heal.png">
+  </section>
+  <section class="taskPage">
+  </section>
+  <script src="js/game.js"></script>
+</body>
+</html>
