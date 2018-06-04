@@ -8,11 +8,11 @@
 <body>
   <section class="regPage">
     <h2>PLAY THE GAME!</h2>
-    <form onsubmit="return false">
+    <form id="xxx">
       <label>NAME:</label>
-      <input id="playerName" type="text" placeholder="*your name" value="ivan" required>
-      <button id="btnStart" type="submit">START!</button>
+      <input id="playerName" type="text" form="xxx" placeholder="*your name" required>
     </form>
+    <button id="btnStart" form="xxx" type="button">START!</button>
   </section>
   <section class="gamePage">
     <div class="fighterNames">
@@ -34,6 +34,12 @@
     <div class="monsterImage"></div>
   </section>
   <section class="scoresPage">
+    <table>
+      <tr>
+        <th>Player</th>
+        <th>Score</th>
+      </tr>
+    </table>
   </section>
   <section class="spellPage">
         <img id="swordSpell" class="spellType" src="img/sword.png">
@@ -47,6 +53,6 @@
       <button id="btnAnswer" type="submit">ANSWER!</button>
     </form>
   </section>
-  <script src="js/game.js"></script>
+  <script src="dist/boundle.js"></script>
 </body>
 </html>

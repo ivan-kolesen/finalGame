@@ -166,6 +166,26 @@ button{
 
 }
 
+table{
+	width: 70%;
+	margin: 0 auto 5vh;
+}
+
+th{
+	width: 50%;
+	font-size: 3vh;
+	padding: 2vh;
+	color: #ffffff;
+}
+
+td{
+	width: 50%;
+	font-size: 3vh;
+	color: #ffffff;
+}
+
+
+
 
 
 .arena1{background-image: url("../img/arena1.jpg");}

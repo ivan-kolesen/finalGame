@@ -1,25 +1,48 @@
+import mylib from "./mylib";
+
 class Monster{
-    constructor(person){
+    constructor(score){
+        this.score = score;
         this.name = Monster.generateName();
-        this.health = Monster.generateHealth(person.score);
+        this.startHealth = Monster.generateHealth(this.score);
+        this.health = this.startHealth;
     }
+
+    drawMonster(){
+        document.querySelector('.monsterImage').style.display = 'block';
+        document.querySelector('.monsterName').innerHTML = this.name;
+        this.setHealth();
+
+        const backgroundImages = ['arena1', 'arena2', 'arena3', 'arena4'];
+        document.querySelector('.gamePage').classList.remove(backgroundImages[this.score%4-1]);
+        document.querySelector('.gamePage').classList.remove(backgroundImages[this.score%4+3]);
+        document.querySelector('.gamePage').classList.add(backgroundImages[this.score%4]);
+    }
+
+    setHealth(){
+        document.querySelector('.monsterHealthRemain').style.width = this.health/this.startHealth*100 + "%";
+        document.querySelector('.monsterHealthRemain').innerHTML = this.health;
+    }
+
+    isAlive(){
+        return this.health > 0;
+    }
+
+
 
     static generateName(){
         const firstNames = ["Kazimir", "Voiclah", "Magamed", "Ludovik", "Genrich", "Sigizmund", "Aslanbek", "Bzdashek"];
         const secondNames = ["\"Hriply\"", "\"Shavka\"", "\"Bambula\"", "\"Baklan\"", "\"Brodyaga\"", "\"Vertuhai\""];
         const thirdNames = ["Vonuchkin", "Svininsky", "Zhirnidze", "Kakulka", "Soplivyan", "Gryaznulenko", "Potnyakovich"];
-        const chosenFirstName = Monster.getRandomArrayElement(firstNames);
-        const chosenSecondName = Monster.getRandomArrayElement(secondNames);
-        const chosenThirdName = Monster.getRandomArrayElement(thirdNames);
+        const chosenFirstName = mylib.getRandomArrayElement(firstNames);
+        const chosenSecondName = mylib.getRandomArrayElement(secondNames);
+        const chosenThirdName = mylib.getRandomArrayElement(thirdNames);
         return chosenFirstName + ' ' + chosenSecondName + ' ' + chosenThirdName;
     }
 
-    static getRandomArrayElement(array){
-        return array[Math.floor(Math.random() * array.length)];
+    static generateHealth(score){
+        return (30 + score*10 + mylib.getRandomFromTo(0, 10));
     }
-
-    static generateHealth(level){
-        return Math.floor(30 + level*10 + Math.random() * 10);
-    }
-
 }
+
+export default Monster;
