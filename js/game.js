@@ -27,11 +27,25 @@ class Game{
 
     setAnswer(){
         const HELPME = document.querySelector('#answer').getAttribute('value');
+        document.querySelector('#answer').setAttribute('value', '');
         this.spell.task.answer = 10;
         document.querySelector('.taskPage').style.display = "none";
         this.spell.cast(this.player, this.monster);
+        if(!this.monster.isAlive()){
+            this.player.score +=1;
+            this.monster = new Monster(this.player.score);
+            this.monster.drawMonster(this.player);
+        }
+        if(!this.player.isAlive()){
+            document.querySelector('.gamePage').style.display = "none";
+            document.querySelector('.scoresPage').style.display = "block";
+        }
+
+
 
     }
+
+
 
 
 
@@ -61,7 +75,9 @@ class Player{
         document.querySelector('.playerHealthRemain').innerHTML = this.health;
     }
 
-
+    isAlive(){
+        return this.health > 0;
+    }
 
 
 }
@@ -80,12 +96,18 @@ class Monster{
         this.setHealth();
 
         const backgroundImages = ['arena1', 'arena2', 'arena3', 'arena4'];
-        document.querySelector('.gamePage').classList.add(backgroundImages[this.level]);
+        document.querySelector('.gamePage').classList.remove(backgroundImages[this.level%4-1]);
+        document.querySelector('.gamePage').classList.remove(backgroundImages[this.level%4+3]);
+        document.querySelector('.gamePage').classList.add(backgroundImages[this.level%4]);
     }
 
     setHealth(){
         document.querySelector('.monsterHealthRemain').style.width = this.health/this.startHealth*100 + "%";
         document.querySelector('.monsterHealthRemain').innerHTML = this.health;
+    }
+
+    isAlive(){
+        return this.health > 0;
     }
 
 
@@ -122,15 +144,13 @@ class Spell{
         this.kind = event.target.getAttribute('id');
         document.querySelector('.spellPage').style.display = "none";
         document.querySelector('.taskPage').style.display = "block";
-
-        console.log(this);
         this.task = new Task();
         this.task.generate();
 
     }
 
     atack(obj){
-        obj.health -= 10;
+        obj.health -= 100;
         obj.setHealth();
     }
 
