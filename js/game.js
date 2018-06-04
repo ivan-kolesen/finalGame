@@ -1,9 +1,10 @@
 class Game{
     constructor(){
-        this.player = "";
-        this.monster = "";
-        this.spell = "";
+        this.player;
+        this.monster;
+        this.spell;
     }
+
 
     create(){
         document.querySelector('.regPage').style.display = "none";
@@ -17,13 +18,22 @@ class Game{
         this.monster.drawMonster(this.player);
 
         this.spell = new Spell();
-
         btnChooseSpell.addEventListener('click', () => {this.spell.open()});
-        btnAnswer.addEventListener('click', () => {this.spell.setAnswer()});
+        btnAnswer.addEventListener('click', () => {this.setAnswer()});
 
 
 
     }
+
+    setAnswer(){
+        const HELPME = document.querySelector('#answer').getAttribute('value');
+        this.spell.task.answer = 10;
+        document.querySelector('.taskPage').style.display = "none";
+        this.spell.cast(this.player, this.monster);
+
+    }
+
+
 
 
 
@@ -52,6 +62,8 @@ class Player{
     }
 
 
+
+
 }
 
 class Monster{
@@ -76,6 +88,8 @@ class Monster{
         document.querySelector('.monsterHealthRemain').innerHTML = this.health;
     }
 
+
+
     static generateName(){
         const firstNames = ["Kazimir", "Voiclah", "Magamed", "Ludovik", "Genrich", "Sigizmund", "Aslanbek", "Bzdashek"];
         const secondNames = ["\"Hriply\"", "\"Shavka\"", "\"Bambula\"", "\"Baklan\"", "\"Brodyaga\"", "\"Vertuhai\""];
@@ -95,8 +109,8 @@ class Monster{
 
 class Spell{
     constructor(){
-        this.kind = '';
-        this.task = '';
+        this.kind;
+        this.task;
     }
 
     open(){
@@ -115,12 +129,31 @@ class Spell{
 
     }
 
-    setAnswer(){
-        const x = document.querySelector('#answer').getAttribute('value');
-        this.task.answer = 10;
-        document.querySelector('.taskPage').style.display = "none";
-        console.log(this);
+    atack(obj){
+        obj.health -= 10;
+        obj.setHealth();
     }
+
+    heal(obj){
+        obj.health = Math.min(obj.health+10, obj.startHealth);
+        obj.setHealth();
+    }
+
+    cast(player, monster){
+        switch (this.kind){
+            case 'swordSpell':
+                this.task.isSolved() ? this.atack(monster) : this.atack(player);
+                break;
+            case 'medicineSpell':
+                this.task.isSolved() ? this.heal(player) : this.atack(player);
+                break;
+            default:
+                null;
+        }
+
+    }
+
+
 
 
 
@@ -131,9 +164,9 @@ class Spell{
 
 class Task{
     constructor(){
-        this.condition = '';
-        this.solution = '';
-        this.answer = '';
+        this.condition;
+        this.solution;
+        this.answer;
     }
 
     generate(){
@@ -147,6 +180,9 @@ class Task{
         //console.log(this);
     }
 
+    isSolved(){
+        return this.solution == this.answer;
+    }
 
 
 
@@ -171,6 +207,7 @@ function getRandomArrayElement(array){
 
 
 const game = new Game();
-btnStart.addEventListener('click', game.create);
+const myGame = game.create.bind(game);
+btnStart.addEventListener('click', myGame);
 
 
