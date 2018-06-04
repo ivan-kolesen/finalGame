@@ -1,6 +1,8 @@
 class Game{
     constructor(){
-
+        this.player = "";
+        this.monster = "";
+        this.spell = "";
     }
 
     create(){
@@ -8,21 +10,24 @@ class Game{
         document.querySelector('.gamePage').style.display = "block";
         const playerName = document.querySelector('input').getAttribute('value');
 
-        const player = new Player(playerName);
-        player.drawPlayer();
+        this.player = new Player(playerName);
+        this.player.drawPlayer();
 
-        const monster = new Monster(player);
-        monster.drawMonster(player);
+        this.monster = new Monster(this.player.score);
+        this.monster.drawMonster(this.player);
 
-        btnChooseSpell.addEventListener('click', Game.startRound);
+        this.spell = new Spell();
+
+        btnChooseSpell.addEventListener('click', () => {this.spell.open()});
+        btnAnswer.addEventListener('click', () => {this.spell.setAnswer()});
+
+
 
     }
 
-    static startRound(){
-        document.querySelector('.spellPage').style.display = "block";
-        const spell = new Spell();
 
-    }
+
+
 
 }
 
@@ -50,33 +55,26 @@ class Player{
 }
 
 class Monster{
-    constructor(player){
+    constructor(score){
+        this.level = score;
         this.name = Monster.generateName();
-        this.startHealth = Monster.generateHealth(player.score);
+        this.startHealth = Monster.generateHealth(this.level);
         this.health = this.startHealth;
     }
 
-    drawMonster(player){
+    drawMonster(){
         document.querySelector('.monsterImage').style.display = 'block';
         document.querySelector('.monsterName').innerHTML = this.name;
         this.setHealth();
 
         const backgroundImages = ['arena1', 'arena2', 'arena3', 'arena4'];
-        document.querySelector('.gamePage').classList.add(backgroundImages[player.score]);
+        document.querySelector('.gamePage').classList.add(backgroundImages[this.level]);
     }
 
     setHealth(){
         document.querySelector('.monsterHealthRemain').style.width = this.health/this.startHealth*100 + "%";
         document.querySelector('.monsterHealthRemain').innerHTML = this.health;
     }
-
-
-
-
-
-
-
-
 
     static generateName(){
         const firstNames = ["Kazimir", "Voiclah", "Magamed", "Ludovik", "Genrich", "Sigizmund", "Aslanbek", "Bzdashek"];
@@ -97,8 +95,61 @@ class Monster{
 
 class Spell{
     constructor(){
+        this.kind = '';
+        this.task = '';
+    }
+
+    open(){
+        document.querySelector('.spellPage').style.display = "block";
+        document.querySelector('.spellPage').addEventListener('click', () => {this.chooseSpell(event)});
+    }
+
+    chooseSpell(event){
+        this.kind = event.target.getAttribute('id');
+        document.querySelector('.spellPage').style.display = "none";
+        document.querySelector('.taskPage').style.display = "block";
+
+        console.log(this);
+        this.task = new Task();
+        this.task.generate();
 
     }
+
+    setAnswer(){
+        const x = document.querySelector('#answer').getAttribute('value');
+        this.task.answer = 10;
+        document.querySelector('.taskPage').style.display = "none";
+        console.log(this);
+    }
+
+
+
+}
+
+
+
+
+class Task{
+    constructor(){
+        this.condition = '';
+        this.solution = '';
+        this.answer = '';
+    }
+
+    generate(){
+        const firstNumber = Math.floor(Math.random()*100);
+        const secondNumber = Math.floor(Math.random()*100);
+        const operations = ['+', '-', '*', '/'];
+        const operation = getRandomArrayElement(operations);
+        this.condition = firstNumber + operation + secondNumber;
+        this.solution = eval(this.condition);
+        document.querySelector('.taskCondition').innerHTML = this.condition;
+        //console.log(this);
+    }
+
+
+
+
 }
 
 

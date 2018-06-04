@@ -47,7 +47,7 @@ section{
 	background-size: cover;
 }
 
-.spellPage{
+.spellPage, .taskPage{
 	position: absolute;
 	top:0;
 	left:25vw;
@@ -160,6 +160,10 @@ button{
 	width: 50%;
 	height: 100%;
 	cursor: pointer;
+}
+
+.taskCondition{
+
 }
 
 
