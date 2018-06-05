@@ -135,18 +135,29 @@ class Game{
         document.querySelector('.taskPage').style.display = "none";
         this.spell.cast(this.player, this.monster);
         if(!this.monster.isAlive()){
-            this.player.score +=1;
-            this.monster = new _monster__WEBPACK_IMPORTED_MODULE_1__["default"](this.player.score);
-            this.monster.drawMonster(this.player);
+            setTimeout(()=>this.monsterKilled(), 5000);
         }
         if(!this.player.isAlive()){
-            document.querySelector('.gamePage').style.display = "none";
-            document.querySelector('.scoresPage').style.display = "block";
-            localStorage.setItem('game' + Date.now(), this.player.name + ',' + this.player.score);
-            _mylib__WEBPACK_IMPORTED_MODULE_3__["default"].createHighscoresTable();
+            setTimeout(()=>this.playerKilled(), 5000);
         }
 
     }
+
+    monsterKilled(){
+        this.player.score +=1;
+        this.monster = new _monster__WEBPACK_IMPORTED_MODULE_1__["default"](this.player.score);
+        this.monster.drawMonster(this.player);
+        this.player.health = Math.min(this.player.health+_mylib__WEBPACK_IMPORTED_MODULE_3__["default"].getRandomFromTo(20, 25+this.player.score*5), this.player.startHealth);
+        this.player.setHealth();
+    }
+
+    playerKilled(){
+        document.querySelector('.gamePage').style.display = "none";
+        document.querySelector('.scoresPage').style.display = "block";
+        localStorage.setItem('game' + Date.now(), this.player.name + ',' + this.player.score);
+        _mylib__WEBPACK_IMPORTED_MODULE_3__["default"].createHighscoresTable();
+    }
+
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Game);
@@ -165,8 +176,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game.js */ "./js/game.js");
 
 
-const game = new _game_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
-const myGame = game.create.bind(game);
+let game = new _game_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+let myGame = game.create.bind(game);
 btnStart.addEventListener('click', myGame);
 
 /***/ }),
@@ -192,13 +203,13 @@ class Monster{
     }
 
     drawMonster(){
-        document.querySelector('.monsterImage').style.display = 'block';
         document.querySelector('.monsterName').innerHTML = this.name;
+        document.querySelector('.round').innerHTML = "round " + (this.score+1);
         this.setHealth();
 
         const backgroundImages = ['arena1', 'arena2', 'arena3', 'arena4'];
-        document.querySelector('.gamePage').classList.remove(backgroundImages[this.score%4-1]);
-        document.querySelector('.gamePage').classList.remove(backgroundImages[this.score%4+3]);
+        document.querySelector('.gamePage').classList.remove(backgroundImages[(this.score-1)%4]);
+        //document.querySelector('.gamePage').classList.remove(backgroundImages[this.score%4+3]);
         document.querySelector('.gamePage').classList.add(backgroundImages[this.score%4]);
     }
 
@@ -295,6 +306,7 @@ class mylib{
         }
         return array;
     }
+
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (mylib);
@@ -319,7 +331,6 @@ class Player{
     }
 
     drawPlayer(){
-        document.querySelector('.playerImage').style.display = 'block';
         document.querySelector('.playerName').innerHTML = this.name;
         this.setHealth();
     }
@@ -327,6 +338,26 @@ class Player{
     setHealth(){
         document.querySelector('.playerHealthRemain').style.width = this.health/this.startHealth*100 + "%";
         document.querySelector('.playerHealthRemain').innerHTML = this.health;
+    }
+
+    fire(){
+        document.querySelector('.spritePlayer').classList.remove('spritePlayerIdle');
+        document.querySelector('.spritePlayer').classList.add('spritePlayerFire');
+    }
+
+    stopFire(){
+        document.querySelector('.spritePlayer').classList.remove('spritePlayerFire');
+        document.querySelector('.spritePlayer').classList.add('spritePlayerIdle');
+    }
+
+    healing(){
+        document.querySelector('.spritePlayer').classList.remove('spritePlayerIdle');
+        document.querySelector('.spritePlayer').classList.add('spritePlayerHeal');
+    }
+
+    stopHealing(){
+        document.querySelector('.spritePlayer').classList.remove('spritePlayerHeal');
+        document.querySelector('.spritePlayer').classList.add('spritePlayerIdle');
     }
 
     isAlive(){
@@ -374,23 +405,27 @@ class Spell{
 
     }
 
-    atack(obj){
-        obj.health -= _mylib__WEBPACK_IMPORTED_MODULE_1__["default"].getRandomFromTo(20, 25+obj.score*5);
-        obj.setHealth();
+    atack(atacking, atacked){
+        atacked.health = Math.max(atacked.health - _mylib__WEBPACK_IMPORTED_MODULE_1__["default"].getRandomFromTo(20, 25+atacked.score*5), 0);
+        atacked.setHealth();
+        atacking.fire();
+        setTimeout(atacking.stopFire, 2000);
     }
 
-    heal(obj){
-        obj.health = Math.min(obj.health+_mylib__WEBPACK_IMPORTED_MODULE_1__["default"].getRandomFromTo(20, 25+obj.score*5), obj.startHealth);
-        obj.setHealth();
+    heal(player){
+        player.health = Math.min(player.health+_mylib__WEBPACK_IMPORTED_MODULE_1__["default"].getRandomFromTo(20, 25+player.score*5), player.startHealth);
+        player.setHealth();
+        player.healing();
+        setTimeout(player.stopHealing, 2000);
     }
 
     cast(player, monster){
         switch (this.kind){
             case 'swordSpell':
-                this.task.isSolved() ? this.atack(monster) : this.atack(player);
+                this.task.isSolved() ? this.atack(player, monster) : this.atack(monster, player);
                 break;
             case 'medicineSpell':
-                this.task.isSolved() ? this.heal(player) : this.atack(player);
+                this.task.isSolved() ? this.heal(player) : this.atack(monster, player);
                 break;
             default:
                 null;

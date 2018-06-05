@@ -47,6 +47,11 @@ section{
 	background-size: cover;
 }
 
+.round{
+	color: #f2ce0c;
+	margin: 0 auto 20px;
+}
+
 .spellPage, .taskPage{
 	position: absolute;
 	top:0;
@@ -121,7 +126,8 @@ button{
 	display: flex;
 	font-size: 40px;
 	color: #ffffff;
-	margin: 10px 30px;
+	padding: 10px 30px;
+	background: radial-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0));
 }
 
 .fighterHealthes{
@@ -158,7 +164,7 @@ button{
 
 .spellType{
 	width: 50%;
-	height: 100%;
+	height: 50%;
 	cursor: pointer;
 }
 
@@ -192,3 +198,105 @@ td{
 .arena2{background-image: url("../img/arena2.png");}
 .arena3{background-image: url("../img/arena3.png");}
 .arena4{background-image: url("../img/arena4.png");}
+
+
+
+
+.spritePlayer{
+	position: absolute;
+	left: 10vw;
+	top: 50vh;
+	width: 330px;
+	height: 250px;
+	transform: scale(1.5);
+}
+
+
+
+.spritePlayerIdle
+{
+	background: url(../img/spritePlayer.png) no-repeat 0 0;
+
+	-webkit-animation-name: spritePlayerIdle;
+	-webkit-animation-duration: 700ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes spritePlayerIdle
+{
+	0% {background-position: 0px 0px;}
+	12.5% {background-position: 0px 0px;}
+	12.501% {background-position: -330px 0px;}
+	25% {background-position: -330px 0px;}
+	25.001% {background-position: -660px 0px;}
+	37.5% {background-position: -660px 0px;}
+	37.501% {background-position: -990px 0px;}
+	50% {background-position: -990px 0px;}
+	50.001% {background-position: -1320px 0px;}
+	62.5% {background-position: -1320px 0px;}
+	62.501% {background-position: -1650px 0px;}
+	75% {background-position: -1650px 0px;}
+	75.001% {background-position: -1980px 0px;}
+	87.5% {background-position: -1980px 0px;}
+	87.501% {background-position: -2310px 0px;}
+	99.999% {background-position: -2310px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
+
+.spritePlayerFire
+{
+	background: url(../img/spritePlayerFire.png) no-repeat 0 0;
+
+	-webkit-animation-name: spritePlayerFire;
+	-webkit-animation-duration: 300ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes spritePlayerFire
+{
+	0% {background-position: 0px 0px;}
+	20% {background-position: 0px 0px;}
+	20.001% {background-position: -340px 0px;}
+	40% {background-position: -340px 0px;}
+	40.001% {background-position: -680px 0px;}
+	60% {background-position: -680px 0px;}
+	60.001% {background-position: -1020px 0px;}
+	80% {background-position: -1020px 0px;}
+	80.001% {background-position: -1360px 0px;}
+	99.999% {background-position: -1360px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
+
+.spritePlayerHeal
+{
+	background: url(../img/spritePlayerHeal.png) no-repeat 0 0;
+
+	-webkit-animation-name: spritePlayerHeal;
+	-webkit-animation-duration: 300ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes spritePlayerHeal
+{
+	0% {background-position: 0px 0px;}
+	20% {background-position: 0px 0px;}
+	20.001% {background-position: -330px 0px;}
+	40% {background-position: -330px 0px;}
+	40.001% {background-position: -660px 0px;}
+	60% {background-position: -660px 0px;}
+	60.001% {background-position: -990px 0px;}
+	80% {background-position: -990px 0px;}
+	80.001% {background-position: -1320px 0px;}
+	99.999% {background-position: -1320px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
+
+
+
+

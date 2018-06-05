@@ -34,18 +34,29 @@ class Game{
         document.querySelector('.taskPage').style.display = "none";
         this.spell.cast(this.player, this.monster);
         if(!this.monster.isAlive()){
-            this.player.score +=1;
-            this.monster = new Monster(this.player.score);
-            this.monster.drawMonster(this.player);
+            setTimeout(()=>this.monsterKilled(), 5000);
         }
         if(!this.player.isAlive()){
-            document.querySelector('.gamePage').style.display = "none";
-            document.querySelector('.scoresPage').style.display = "block";
-            localStorage.setItem('game' + Date.now(), this.player.name + ',' + this.player.score);
-            mylib.createHighscoresTable();
+            setTimeout(()=>this.playerKilled(), 5000);
         }
 
     }
+
+    monsterKilled(){
+        this.player.score +=1;
+        this.monster = new Monster(this.player.score);
+        this.monster.drawMonster(this.player);
+        this.player.health = Math.min(this.player.health+mylib.getRandomFromTo(20, 25+this.player.score*5), this.player.startHealth);
+        this.player.setHealth();
+    }
+
+    playerKilled(){
+        document.querySelector('.gamePage').style.display = "none";
+        document.querySelector('.scoresPage').style.display = "block";
+        localStorage.setItem('game' + Date.now(), this.player.name + ',' + this.player.score);
+        mylib.createHighscoresTable();
+    }
+
 }
 
 export default Game;

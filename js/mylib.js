@@ -52,6 +52,7 @@ class mylib{
         }
         return array;
     }
+
 }
 
 export default mylib;

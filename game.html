@@ -8,11 +8,11 @@
 <body>
   <section class="regPage">
     <h2>PLAY THE GAME!</h2>
-    <form id="xxx">
+    <form>
       <label>NAME:</label>
-      <input id="playerName" type="text" form="xxx" placeholder="*your name" required>
+      <input id="playerName" type="text" placeholder="*your name" required>
     </form>
-    <button id="btnStart" form="xxx" type="button">START!</button>
+    <button id="btnStart" type="button">START!</button>
   </section>
   <section class="gamePage">
     <div class="fighterNames">
@@ -27,11 +27,11 @@
         <div class="monsterHealthRemain"></div>
       </div>
     </div>
+    <h2 class="round">ROUND 1</h2>
     <form>
       <button id="btnChooseSpell" type="button">Choose spell!</button>
     </form>
-    <div class="playerImage"></div>
-    <div class="monsterImage"></div>
+    <div class="spritePlayer spritePlayerIdle"></div>
   </section>
   <section class="scoresPage">
     <table>
@@ -40,10 +40,13 @@
         <th>Score</th>
       </tr>
     </table>
+    <!--<button id="btnNewGame" type="button">NEW GAME!</button>-->
   </section>
   <section class="spellPage">
-        <img id="swordSpell" class="spellType" src="img/sword.png">
-        <img id="medicineSpell" class="spellType" src="img/heal.png">
+    <img id="swordSpell" class="spellType" src="img/sword.png">
+    <img id="medicineSpell" class="spellType" src="img/heal.png">
+    <img id="3Spell" class="spellType" src="img/sword.png">
+    <img id="4Spell" class="spellType" src="img/heal.png">
   </section>
   <section class="taskPage">
     <h2 class="taskCondition"></h2>

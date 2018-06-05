@@ -9,13 +9,13 @@ class Monster{
     }
 
     drawMonster(){
-        document.querySelector('.monsterImage').style.display = 'block';
         document.querySelector('.monsterName').innerHTML = this.name;
+        document.querySelector('.round').innerHTML = "round " + (this.score+1);
         this.setHealth();
 
         const backgroundImages = ['arena1', 'arena2', 'arena3', 'arena4'];
-        document.querySelector('.gamePage').classList.remove(backgroundImages[this.score%4-1]);
-        document.querySelector('.gamePage').classList.remove(backgroundImages[this.score%4+3]);
+        document.querySelector('.gamePage').classList.remove(backgroundImages[(this.score-1)%4]);
+        //document.querySelector('.gamePage').classList.remove(backgroundImages[this.score%4+3]);
         document.querySelector('.gamePage').classList.add(backgroundImages[this.score%4]);
     }
 

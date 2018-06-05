@@ -21,23 +21,27 @@ class Spell{
 
     }
 
-    atack(obj){
-        obj.health -= mylib.getRandomFromTo(20, 25+obj.score*5);
-        obj.setHealth();
+    atack(atacking, atacked){
+        atacked.health = Math.max(atacked.health - mylib.getRandomFromTo(20, 25+atacked.score*5), 0);
+        atacked.setHealth();
+        atacking.fire();
+        setTimeout(atacking.stopFire, 2000);
     }
 
-    heal(obj){
-        obj.health = Math.min(obj.health+mylib.getRandomFromTo(20, 25+obj.score*5), obj.startHealth);
-        obj.setHealth();
+    heal(player){
+        player.health = Math.min(player.health+mylib.getRandomFromTo(20, 25+player.score*5), player.startHealth);
+        player.setHealth();
+        player.healing();
+        setTimeout(player.stopHealing, 2000);
     }
 
     cast(player, monster){
         switch (this.kind){
             case 'swordSpell':
-                this.task.isSolved() ? this.atack(monster) : this.atack(player);
+                this.task.isSolved() ? this.atack(player, monster) : this.atack(monster, player);
                 break;
             case 'medicineSpell':
-                this.task.isSolved() ? this.heal(player) : this.atack(player);
+                this.task.isSolved() ? this.heal(player) : this.atack(monster, player);
                 break;
             default:
                 null;
