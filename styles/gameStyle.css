@@ -54,12 +54,34 @@ section{
 
 .spellPage, .taskPage{
 	position: absolute;
-	top:0;
-	left:25vw;
-	width: 500px;
-	height: 500px;
-	background-color: gainsboro;
-	margin: 25vh auto;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.7);
+}
+
+.modalWindow{
+	position: absolute;
+	background-color: rgba(255,255,255,0.9);
+	border-radius: 5px;
+	padding: 30px;
+}
+
+.modalWindow__spell{
+	top: 30vh;
+	left: 35.5vw;
+}
+
+.modalWindow__task{
+	top: 30vh;
+	left: 30vw;
+}
+
+.spellHeader{
+	width: 100%;
+	height: 50%;
+	margin: 0;
 }
 
 h2{
@@ -67,6 +89,7 @@ h2{
 	font-size: 50px;
 	color: #000000;
 	margin: 0 auto 50px;
+	line-height: 70px;
 }
 
 label{
@@ -168,6 +191,10 @@ button{
 	cursor: pointer;
 }
 
+.spellType:hover{
+	transform: scale(1.2);
+}
+
 .taskCondition{
 
 }
@@ -216,9 +243,8 @@ td{
 .spritePlayerIdle
 {
 	background: url(../img/spritePlayer.png) no-repeat 0 0;
-
 	-webkit-animation-name: spritePlayerIdle;
-	-webkit-animation-duration: 700ms;
+	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
 }
@@ -248,7 +274,6 @@ td{
 .spritePlayerFire
 {
 	background: url(../img/spritePlayerFire.png) no-repeat 0 0;
-
 	-webkit-animation-name: spritePlayerFire;
 	-webkit-animation-duration: 300ms;
 	-webkit-animation-iteration-count: infinite;
@@ -273,8 +298,7 @@ td{
 
 .spritePlayerHeal
 {
-	background: url(../img/spritePlayerHeal.png) no-repeat 0 0;
-
+	background: url(../img/spritePlayerHeal1.png) no-repeat 0 0;
 	-webkit-animation-name: spritePlayerHeal;
 	-webkit-animation-duration: 300ms;
 	-webkit-animation-iteration-count: infinite;
@@ -297,6 +321,266 @@ td{
 
 }
 
+.spritePlayerHurt
+{
+	background: url(../img/spritePlayerHurt.png) no-repeat 0 0;
+	-webkit-animation-name: spritePlayerHurt;
+	-webkit-animation-duration: 300ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes spritePlayerHurt
+{
+	0% {background-position: 0px 0px;}
+	16.666% {background-position: 0px 0px;}
+	16.667% {background-position: -330px 0px;}
+	33.333% {background-position: -330px 0px;}
+	33.334% {background-position: -660px 0px;}
+	49.999% {background-position: -660px 0px;}
+	50% {background-position: -990px 0px;}
+	66.666% {background-position: -990px 0px;}
+	66.667% {background-position: -1320px 0px;}
+	83.333% {background-position: -1320px 0px;}
+	83.334% {background-position: -1650px 0px;}
+	99.999% {background-position: -1650px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
+
+.spritePlayerDie
+{
+	background: url(../img/spritePlayerDie.png) no-repeat 0 0;
+	-webkit-animation-name: spritePlayerDie;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: 5;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes spritePlayerDie
+{
+	0% {background-position: 0px 0px;}
+	14.285% {background-position: 0px 0px;}
+	14.286% {background-position: -330px 0px;}
+	28.571% {background-position: -330px 0px;}
+	28.572% {background-position: -660px 0px;}
+	42.856% {background-position: -660px 0px;}
+	42.857% {background-position: -990px 0px;}
+	57.141% {background-position: -990px 0px;}
+	57.142% {background-position: -1320px 0px;}
+	71.426% {background-position: -1320px 0px;}
+	71.427% {background-position: -1650px 0px;}
+	85.711% {background-position: -1650px 0px;}
+	85.712% {background-position: -1980px 0px;}
+	99.999% {background-position: -1980px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
 
 
 
+
+
+
+.spriteMonster{
+	position: absolute;
+	right: 10vw;
+	top: 50vh;
+	width: 330px;
+	transform: scale(1.5);
+}
+
+.spriteMonsterHeadIdle
+{
+	height: 101px;
+	-webkit-animation-name: spriteMonsterHeadIdle;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterHeadIdle_first{ background: url(../img/monster/idle/heads/monsterHeadIdle1.png) no-repeat 0 0;}
+.spriteMonsterHeadIdle_second{ background: url(../img/monster/idle/heads/monsterHeadIdle2.png) no-repeat 0 0;}
+.spriteMonsterHeadIdle_third{ background: url(../img/monster/idle/heads/monsterHeadIdle3.png) no-repeat 0 0;}
+
+@-webkit-keyframes spriteMonsterHeadIdle
+{
+	0% {background-position: 0px 0px;}
+	12.5% {background-position: 0px 0px;}
+	12.501% {background-position: -330px 0px;}
+	25% {background-position: -330px 0px;}
+	25.001% {background-position: -660px 0px;}
+	37.5% {background-position: -660px 0px;}
+	37.501% {background-position: -990px 0px;}
+	50% {background-position: -990px 0px;}
+	50.001% {background-position: -1320px 0px;}
+	62.5% {background-position: -1320px 0px;}
+	62.501% {background-position: -1650px 0px;}
+	75% {background-position: -1650px 0px;}
+	75.001% {background-position: -1980px 0px;}
+	87.5% {background-position: -1980px 0px;}
+	87.501% {background-position: -2310px 0px;}
+	99.999% {background-position: -2310px 0px;}
+	100% {background-position: 0px 0px;}
+}
+
+.spriteMonsterBodyIdle
+{
+	height: 100px;
+	-webkit-animation-name: spriteMonsterBodyIdle;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterBodyIdle_first{ background: url(../img/monster/idle/bodies/monsterBodyIdle1.png) no-repeat 0 0;}
+.spriteMonsterBodyIdle_second{ background: url(../img/monster/idle/bodies/monsterBodyIdle2.png) no-repeat 0 0;}
+.spriteMonsterBodyIdle_third{ background: url(../img/monster/idle/bodies/monsterBodyIdle3.png) no-repeat 0 0;}
+
+@-webkit-keyframes spriteMonsterBodyIdle
+{
+	0% {background-position: 0px 0px;}
+	12.5% {background-position: 0px 0px;}
+	12.501% {background-position: -330px 0px;}
+	25% {background-position: -330px 0px;}
+	25.001% {background-position: -660px 0px;}
+	37.5% {background-position: -660px 0px;}
+	37.501% {background-position: -990px 0px;}
+	50% {background-position: -990px 0px;}
+	50.001% {background-position: -1320px 0px;}
+	62.5% {background-position: -1320px 0px;}
+	62.501% {background-position: -1650px 0px;}
+	75% {background-position: -1650px 0px;}
+	75.001% {background-position: -1980px 0px;}
+	87.5% {background-position: -1980px 0px;}
+	87.501% {background-position: -2310px 0px;}
+	99.999% {background-position: -2310px 0px;}
+	100% {background-position: 0px 0px;}
+}
+
+.spriteMonsterLegsIdle
+{
+	height: 49px;
+	-webkit-animation-name: spriteMonsterLegsIdle;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterLegsIdle_first{ background: url(../img/monster/idle/legs/monsterLegsIdle1.png) no-repeat 0 0;}
+.spriteMonsterLegsIdle_second{ background: url(../img/monster/idle/legs/monsterLegsIdle2.png) no-repeat 0 0;}
+.spriteMonsterLegsIdle_third{ background: url(../img/monster/idle/legs/monsterLegsIdle3.png) no-repeat 0 0;}
+
+@-webkit-keyframes spriteMonsterLegsIdle
+{
+	0% {background-position: 0px 0px;}
+	12.5% {background-position: 0px 0px;}
+	12.501% {background-position: -330px 0px;}
+	25% {background-position: -330px 0px;}
+	25.001% {background-position: -660px 0px;}
+	37.5% {background-position: -660px 0px;}
+	37.501% {background-position: -990px 0px;}
+	50% {background-position: -990px 0px;}
+	50.001% {background-position: -1320px 0px;}
+	62.5% {background-position: -1320px 0px;}
+	62.501% {background-position: -1650px 0px;}
+	75% {background-position: -1650px 0px;}
+	75.001% {background-position: -1980px 0px;}
+	87.5% {background-position: -1980px 0px;}
+	87.501% {background-position: -2310px 0px;}
+	99.999% {background-position: -2310px 0px;}
+	100% {background-position: 0px 0px;}
+}
+
+
+
+
+.spriteMonsterHeadFire
+{
+	height: 101px;
+	-webkit-animation-name: spriteMonsterHeadFire;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterHeadFire_first{ background: url(../img/monster/fire/head/monsterHeadFire1.png) no-repeat 0 0;}
+.spriteMonsterHeadFire_second{ background: url(../img/monster/fire/head/monsterHeadFire2.png) no-repeat 0 0;}
+.spriteMonsterHeadFire_third{ background: url(../img/monster/fire/head/monsterHeadFire3.png) no-repeat 0 0;}
+
+
+@-webkit-keyframes spriteMonsterHeadFire
+{
+	0% {background-position: 0px 0px;}
+	20% {background-position: 0px 0px;}
+	20.001% {background-position: -330px 0px;}
+	40% {background-position: -330px 0px;}
+	40.001% {background-position: -660px 0px;}
+	60% {background-position: -660px 0px;}
+	60.001% {background-position: -990px 0px;}
+	80% {background-position: -990px 0px;}
+	80.001% {background-position: -1320px 0px;}
+	99.999% {background-position: -1320px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
+
+.spriteMonsterBodyFire
+{
+	height: 102px;
+	-webkit-animation-name: spriteMonsterBodyFire;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterBodyFire_first{ background: url(../img/monster/fire/body/monsterBodyFire1.png) no-repeat 0 0;}
+.spriteMonsterBodyFire_second{ background: url(../img/monster/fire/body/monsterBodyFire2.png) no-repeat 0 0;}
+.spriteMonsterBodyFire_third{ background: url(../img/monster/fire/body/monsterBodyFire3.png) no-repeat 0 0;}
+
+
+@-webkit-keyframes spriteMonsterBodyFire
+{
+	0% {background-position: 0px 0px;}
+	20% {background-position: 0px 0px;}
+	20.001% {background-position: -330px 0px;}
+	40% {background-position: -330px 0px;}
+	40.001% {background-position: -660px 0px;}
+	60% {background-position: -660px 0px;}
+	60.001% {background-position: -990px 0px;}
+	80% {background-position: -990px 0px;}
+	80.001% {background-position: -1320px 0px;}
+	99.999% {background-position: -1320px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
+
+.spriteMonsterLegsFire
+{
+	height: 47px;
+	-webkit-animation-name: spriteMonsterLegsFire;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterLegsFire_first{ background: url(../img/monster/fire/legs/monsterLegsFire1.png) no-repeat 0 0;}
+.spriteMonsterLegsFire_second{ background: url(../img/monster/fire/legs/monsterLegsFire2.png) no-repeat 0 0;}
+.spriteMonsterLegsFire_third{ background: url(../img/monster/fire/legs/monsterLegsFire3.png) no-repeat 0 0;}
+
+
+@-webkit-keyframes spriteMonsterLegsFire
+{
+	0% {background-position: 0px 0px;}
+	20% {background-position: 0px 0px;}
+	20.001% {background-position: -330px 0px;}
+	40% {background-position: -330px 0px;}
+	40.001% {background-position: -660px 0px;}
+	60% {background-position: -660px 0px;}
+	60.001% {background-position: -990px 0px;}
+	80% {background-position: -990px 0px;}
+	80.001% {background-position: -1320px 0px;}
+	99.999% {background-position: -1320px 0px;}
+	100% {background-position: 0px 0px;}
+
+}

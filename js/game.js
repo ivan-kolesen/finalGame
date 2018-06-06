@@ -37,6 +37,7 @@ class Game{
             setTimeout(()=>this.monsterKilled(), 5000);
         }
         if(!this.player.isAlive()){
+            this.player.die();
             setTimeout(()=>this.playerKilled(), 5000);
         }
 

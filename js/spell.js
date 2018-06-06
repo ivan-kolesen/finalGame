@@ -9,7 +9,7 @@ class Spell{
 
     open(){
         document.querySelector('.spellPage').style.display = "block";
-        document.querySelector('.spellPage').addEventListener('click', () => {this.chooseSpell(event)});
+        document.querySelector('.spells').addEventListener('click', () => {this.chooseSpell(event)});
     }
 
     chooseSpell(event){
@@ -25,7 +25,9 @@ class Spell{
         atacked.health = Math.max(atacked.health - mylib.getRandomFromTo(20, 25+atacked.score*5), 0);
         atacked.setHealth();
         atacking.fire();
-        setTimeout(atacking.stopFire, 2000);
+        atacked.hurt();
+        setTimeout(atacking.stopFire.bind(atacking), 2000);
+        setTimeout(atacked.stopHurt, 2000);
     }
 
     heal(player){

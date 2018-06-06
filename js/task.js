@@ -14,7 +14,7 @@ class Task{
         const operation = mylib.getRandomArrayElement(operations);
         this.condition = firstNumber + operation + secondNumber;
         this.solution = eval(this.condition);
-        document.querySelector('.taskCondition').innerHTML = this.condition;
+        document.querySelector('.taskCondition').innerHTML = "solve the task:<br>" + this.condition;
     }
 
     isSolved(){

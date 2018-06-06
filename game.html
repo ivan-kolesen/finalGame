@@ -32,6 +32,11 @@
       <button id="btnChooseSpell" type="button">Choose spell!</button>
     </form>
     <div class="spritePlayer spritePlayerIdle"></div>
+    <div class="spriteMonster">
+      <div class="spriteMonsterHeadIdle"></div>
+      <div class="spriteMonsterBodyIdle"></div>
+      <div class="spriteMonsterLegsIdle"></div>
+    </div>
   </section>
   <section class="scoresPage">
     <table>
@@ -43,18 +48,22 @@
     <!--<button id="btnNewGame" type="button">NEW GAME!</button>-->
   </section>
   <section class="spellPage">
-    <img id="swordSpell" class="spellType" src="img/sword.png">
-    <img id="medicineSpell" class="spellType" src="img/heal.png">
-    <img id="3Spell" class="spellType" src="img/sword.png">
-    <img id="4Spell" class="spellType" src="img/heal.png">
+    <div class="modalWindow modalWindow__spell">
+      <h2 class="spellHeader">Choose the spell</h2>
+      <div class="spells">
+        <img id="swordSpell" class="spellType" src="img/sword.png">
+        <img id="medicineSpell" class="spellType" src="img/heal.png">
+      </div>
+    </div>
   </section>
   <section class="taskPage">
-    <h2 class="taskCondition"></h2>
-    <form onsubmit="return false">
-      <label>answer:</label>
-      <input id="answer" type="text" placeholder="your answer">
-      <button id="btnAnswer" type="submit">ANSWER!</button>
-    </form>
+    <div class="modalWindow modalWindow__task">
+      <h2 class="taskCondition"></h2>
+      <form>
+        <input id="answer" type="text" placeholder="your answer">
+        <button id="btnAnswer" type="button">ANSWER!</button>
+      </form>
+    </div>
   </section>
   <script src="dist/boundle.js"></script>
 </body>

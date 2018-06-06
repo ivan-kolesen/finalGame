@@ -36,6 +36,21 @@ class Player{
         document.querySelector('.spritePlayer').classList.add('spritePlayerIdle');
     }
 
+    hurt(){
+        document.querySelector('.spritePlayer').classList.remove('spritePlayerIdle');
+        document.querySelector('.spritePlayer').classList.add('spritePlayerHurt');
+    }
+
+    stopHurt(){
+        document.querySelector('.spritePlayer').classList.remove('spritePlayerHurt');
+        document.querySelector('.spritePlayer').classList.add('spritePlayerIdle');
+    }
+
+    die(){
+        document.querySelector('.spritePlayer').classList.remove('spritePlayerIdle');
+        document.querySelector('.spritePlayer').classList.add('spritePlayerDie');
+    }
+
     isAlive(){
         return this.health > 0;
     }
