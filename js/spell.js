@@ -27,7 +27,7 @@ class Spell{
         atacking.fire();
         atacked.hurt();
         setTimeout(atacking.stopFire.bind(atacking), 2000);
-        setTimeout(atacked.stopHurt, 2000);
+        setTimeout(atacked.stopHurt.bind(atacked), 2000);
     }
 
     heal(player){

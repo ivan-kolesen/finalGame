@@ -8,6 +8,13 @@ class Task{
     }
 
     generate(){
+        const tasks = [this.arithmetics, this.arithmetics];
+        const currentTask = mylib.getRandomArrayElement(tasks).bind(this);
+        currentTask();
+
+    }
+
+    arithmetics(){
         const firstNumber = mylib.getRandomFromTo(0, 100);
         const secondNumber = mylib.getRandomFromTo(0, 100);
         const operations = ['+', '-', '*', '/'];
@@ -15,6 +22,10 @@ class Task{
         this.condition = firstNumber + operation + secondNumber;
         this.solution = eval(this.condition);
         document.querySelector('.taskCondition').innerHTML = "solve the task:<br>" + this.condition;
+    }
+
+    translate(){
+        console.log("you win");
     }
 
     isSolved(){

@@ -145,6 +145,17 @@ class Game{
     }
 
     monsterKilled(){
+        const headsIdle = ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'];
+        const bodiesIdle = ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'];
+        const legsIdle = ['spriteMonsterLegsIdle_first', 'spriteMonsterLegsIdle_second','spriteMonsterLegsIdle_third'];
+        const spriteMonster = document.querySelector('.spriteMonster');
+        let x = headsIdle[this.monster.head];
+        spriteMonster.children[0].classList.remove(headsIdle[this.monster.head]);
+        x = bodiesIdle[this.monster.body];
+        spriteMonster.children[1].classList.remove(bodiesIdle[this.monster.body]);
+        x = legsIdle[this.monster.legs];
+        spriteMonster.children[2].classList.remove(legsIdle[this.monster.legs]);
+
         this.player.score +=1;
         this.monster = new _monster__WEBPACK_IMPORTED_MODULE_1__["default"](this.player.score);
         this.monster.drawMonster(this.player);
@@ -213,11 +224,8 @@ class Monster{
 
         const backgroundImages = ['arena1', 'arena2', 'arena3', 'arena4'];
 
-
-
         document.querySelector('.gamePage').classList.add(backgroundImages[this.score%4]);
         document.querySelector('.gamePage').classList.remove(backgroundImages[(this.score-1)%4]);
-
 
         const headsIdle = ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'];
         const bodiesIdle = ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'];
@@ -243,6 +251,7 @@ class Monster{
     }
 
     fire(){
+        /*ПЕРЕНЕСТИ В СЛОВАРЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
         const headsIdle = ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'];
         const bodiesIdle = ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'];
         const legsIdle = ['spriteMonsterLegsIdle_first', 'spriteMonsterLegsIdle_second','spriteMonsterLegsIdle_third'];
@@ -250,22 +259,24 @@ class Monster{
         const bodiesFire = ['spriteMonsterBodyFire_first', 'spriteMonsterBodyFire_second','spriteMonsterBodyFire_third'];
         const legsFire = ['spriteMonsterLegsFire_first', 'spriteMonsterLegsFire_second','spriteMonsterLegsFire_third'];
 
-        document.querySelector('.spriteMonster').children[0].classList.remove('spriteMonsterHeadIdle');
-        document.querySelector('.spriteMonster').children[0].classList.remove(headsIdle[this.head]);
-        document.querySelector('.spriteMonster').children[1].classList.remove('spriteMonsterBodyIdle');
-        document.querySelector('.spriteMonster').children[1].classList.remove(bodiesIdle[this.body]);
-        document.querySelector('.spriteMonster').children[2].classList.remove('spriteMonsterLegsIdle');
-        document.querySelector('.spriteMonster').children[2].classList.remove(legsIdle[this.legs]);
-        document.querySelector('.spriteMonster').children[0].classList.add('spriteMonsterHeadFire');
-        document.querySelector('.spriteMonster').children[0].classList.add(headsFire[this.head]);
-        document.querySelector('.spriteMonster').children[1].classList.add('spriteMonsterBodyFire');
-        document.querySelector('.spriteMonster').children[1].classList.add(bodiesFire[this.body]);
-        document.querySelector('.spriteMonster').children[2].classList.add('spriteMonsterLegsFire');
-        document.querySelector('.spriteMonster').children[2].classList.add(legsFire[this.legs]);
+        const spriteMonster = document.querySelector('.spriteMonster');
+        spriteMonster.children[0].classList.remove('spriteMonsterHeadIdle');
+        spriteMonster.children[0].classList.remove(headsIdle[this.head]);
+        spriteMonster.children[1].classList.remove('spriteMonsterBodyIdle');
+        spriteMonster.children[1].classList.remove(bodiesIdle[this.body]);
+        spriteMonster.children[2].classList.remove('spriteMonsterLegsIdle');
+        spriteMonster.children[2].classList.remove(legsIdle[this.legs]);
+        spriteMonster.children[0].classList.add('spriteMonsterHeadFire');
+        spriteMonster.children[0].classList.add(headsFire[this.head]);
+        spriteMonster.children[1].classList.add('spriteMonsterBodyFire');
+        spriteMonster.children[1].classList.add(bodiesFire[this.body]);
+        spriteMonster.children[2].classList.add('spriteMonsterLegsFire');
+        spriteMonster.children[2].classList.add(legsFire[this.legs]);
 
     }
 
     stopFire(){
+        /*ПЕРЕНЕСТИ В СЛОВАРЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
         const headsIdle = ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'];
         const bodiesIdle = ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'];
         const legsIdle = ['spriteMonsterLegsIdle_first', 'spriteMonsterLegsIdle_second','spriteMonsterLegsIdle_third'];
@@ -273,18 +284,65 @@ class Monster{
         const bodiesFire = ['spriteMonsterBodyFire_first', 'spriteMonsterBodyFire_second','spriteMonsterBodyFire_third'];
         const legsFire = ['spriteMonsterLegsFire_first', 'spriteMonsterLegsFire_second','spriteMonsterLegsFire_third'];
 
-        document.querySelector('.spriteMonster').children[0].classList.remove('spriteMonsterHeadFire');
-        document.querySelector('.spriteMonster').children[0].classList.remove(headsFire[this.head]);
-        document.querySelector('.spriteMonster').children[1].classList.remove('spriteMonsterBodyFire');
-        document.querySelector('.spriteMonster').children[1].classList.remove(bodiesFire[this.body]);
-        document.querySelector('.spriteMonster').children[2].classList.remove('spriteMonsterLegsFire');
-        document.querySelector('.spriteMonster').children[2].classList.remove(legsFire[this.legs]);
-        document.querySelector('.spriteMonster').children[0].classList.add('spriteMonsterHeadIdle');
-        document.querySelector('.spriteMonster').children[0].classList.add(headsIdle[this.head]);
-        document.querySelector('.spriteMonster').children[1].classList.add('spriteMonsterBodyIdle');
-        document.querySelector('.spriteMonster').children[1].classList.add(bodiesIdle[this.body]);
-        document.querySelector('.spriteMonster').children[2].classList.add('spriteMonsterLegsIdle');
-        document.querySelector('.spriteMonster').children[2].classList.add(legsIdle[this.legs]);
+        const spriteMonster = document.querySelector('.spriteMonster');
+        spriteMonster.children[0].classList.remove('spriteMonsterHeadFire');
+        spriteMonster.children[0].classList.remove(headsFire[this.head]);
+        spriteMonster.children[1].classList.remove('spriteMonsterBodyFire');
+        spriteMonster.children[1].classList.remove(bodiesFire[this.body]);
+        spriteMonster.children[2].classList.remove('spriteMonsterLegsFire');
+        spriteMonster.children[2].classList.remove(legsFire[this.legs]);
+        spriteMonster.children[0].classList.add('spriteMonsterHeadIdle');
+        spriteMonster.children[0].classList.add(headsIdle[this.head]);
+        spriteMonster.children[1].classList.add('spriteMonsterBodyIdle');
+        spriteMonster.children[1].classList.add(bodiesIdle[this.body]);
+        spriteMonster.children[2].classList.add('spriteMonsterLegsIdle');
+        spriteMonster.children[2].classList.add(legsIdle[this.legs]);
+    }
+
+    hurt(){
+        const headsIdle = ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'];
+        const bodiesIdle = ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'];
+        const legsIdle = ['spriteMonsterLegsIdle_first', 'spriteMonsterLegsIdle_second','spriteMonsterLegsIdle_third'];
+        const headsHurt = ['spriteMonsterHeadHurt_first', 'spriteMonsterHeadHurt_second','spriteMonsterHeadHurt_third'];
+        const bodiesHurt = ['spriteMonsterBodyHurt_first', 'spriteMonsterBodyHurt_second','spriteMonsterBodyHurt_third'];
+        const legsHurt = ['spriteMonsterLegsHurt_first', 'spriteMonsterLegsHurt_second','spriteMonsterLegsHurt_third'];
+
+        const spriteMonster = document.querySelector('.spriteMonster');
+        spriteMonster.children[0].classList.remove('spriteMonsterHeadIdle');
+        spriteMonster.children[0].classList.remove(headsIdle[this.head]);
+        spriteMonster.children[1].classList.remove('spriteMonsterBodyIdle');
+        spriteMonster.children[1].classList.remove(bodiesIdle[this.body]);
+        spriteMonster.children[2].classList.remove('spriteMonsterLegsIdle');
+        spriteMonster.children[2].classList.remove(legsIdle[this.legs]);
+        spriteMonster.children[0].classList.add('spriteMonsterHeadHurt');
+        spriteMonster.children[0].classList.add(headsHurt[this.head]);
+        spriteMonster.children[1].classList.add('spriteMonsterBodyHurt');
+        spriteMonster.children[1].classList.add(bodiesHurt[this.body]);
+        spriteMonster.children[2].classList.add('spriteMonsterLegsHurt');
+        spriteMonster.children[2].classList.add(legsHurt[this.legs]);
+    }
+
+    stopHurt(){
+        const headsIdle = ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'];
+        const bodiesIdle = ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'];
+        const legsIdle = ['spriteMonsterLegsIdle_first', 'spriteMonsterLegsIdle_second','spriteMonsterLegsIdle_third'];
+        const headsHurt = ['spriteMonsterHeadHurt_first', 'spriteMonsterHeadHurt_second','spriteMonsterHeadHurt_third'];
+        const bodiesHurt = ['spriteMonsterBodyHurt_first', 'spriteMonsterBodyHurt_second','spriteMonsterBodyHurt_third'];
+        const legsHurt = ['spriteMonsterLegsHurt_first', 'spriteMonsterLegsHurt_second','spriteMonsterLegsHurt_third'];
+
+        const spriteMonster = document.querySelector('.spriteMonster');
+        spriteMonster.children[0].classList.remove('spriteMonsterHeadHurt');
+        spriteMonster.children[0].classList.remove(headsHurt[this.head]);
+        spriteMonster.children[1].classList.remove('spriteMonsterBodyHurt');
+        spriteMonster.children[1].classList.remove(bodiesHurt[this.body]);
+        spriteMonster.children[2].classList.remove('spriteMonsterLegsHurt');
+        spriteMonster.children[2].classList.remove(legsHurt[this.legs]);
+        spriteMonster.children[0].classList.add('spriteMonsterHeadIdle');
+        spriteMonster.children[0].classList.add(headsIdle[this.head]);
+        spriteMonster.children[1].classList.add('spriteMonsterBodyIdle');
+        spriteMonster.children[1].classList.add(bodiesIdle[this.body]);
+        spriteMonster.children[2].classList.add('spriteMonsterLegsIdle');
+        spriteMonster.children[2].classList.add(legsIdle[this.legs]);
     }
 
     isAlive(){
@@ -322,7 +380,6 @@ class Monster{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 class mylib{
-    constructor(){}
 
     static getRandomArrayElement(array){
         return array[Math.floor(Math.random() * array.length)];
@@ -495,7 +552,7 @@ class Spell{
         atacking.fire();
         atacked.hurt();
         setTimeout(atacking.stopFire.bind(atacking), 2000);
-        setTimeout(atacked.stopHurt, 2000);
+        setTimeout(atacked.stopHurt.bind(atacked), 2000);
     }
 
     heal(player){
@@ -544,6 +601,13 @@ class Task{
     }
 
     generate(){
+        const tasks = [this.arithmetics, this.arithmetics];
+        const currentTask = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(tasks).bind(this);
+        currentTask();
+
+    }
+
+    arithmetics(){
         const firstNumber = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, 100);
         const secondNumber = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, 100);
         const operations = ['+', '-', '*', '/'];
@@ -551,6 +615,10 @@ class Task{
         this.condition = firstNumber + operation + secondNumber;
         this.solution = eval(this.condition);
         document.querySelector('.taskCondition').innerHTML = "solve the task:<br>" + this.condition;
+    }
+
+    translate(){
+        console.log("you win");
     }
 
     isSolved(){

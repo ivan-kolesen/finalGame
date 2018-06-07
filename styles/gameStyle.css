@@ -325,7 +325,7 @@ td{
 {
 	background: url(../img/spritePlayerHurt.png) no-repeat 0 0;
 	-webkit-animation-name: spritePlayerHurt;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 350ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
 }
@@ -376,7 +376,6 @@ td{
 	100% {background-position: 0px 0px;}
 
 }
-
 
 
 
@@ -581,6 +580,104 @@ td{
 	80% {background-position: -990px 0px;}
 	80.001% {background-position: -1320px 0px;}
 	99.999% {background-position: -1320px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
+
+
+
+.spriteMonsterHeadHurt
+{
+	height: 96px;
+	-webkit-animation-name: spriteMonsterHeadHurt;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterHeadHurt_first{ background: url(../img/monster/hurt/head/monsterHeadHurt1.png) no-repeat 0 0;}
+.spriteMonsterHeadHurt_second{ background: url(../img/monster/hurt/head/monsterHeadHurt2.png) no-repeat 0 0;}
+.spriteMonsterHeadHurt_third{ background: url(../img/monster/hurt/head/monsterHeadHurt3.png) no-repeat 0 0;}
+
+
+@-webkit-keyframes spriteMonsterHeadHurt
+{
+	0% {background-position: 0px 0px;}
+	16.666% {background-position: 0px 0px;}
+	16.667% {background-position: -330px 0px;}
+	33.333% {background-position: -330px 0px;}
+	33.334% {background-position: -660px 0px;}
+	49.999% {background-position: -660px 0px;}
+	50% {background-position: -990px 0px;}
+	66.666% {background-position: -990px 0px;}
+	66.667% {background-position: -1320px 0px;}
+	83.333% {background-position: -1320px 0px;}
+	83.334% {background-position: -1650px 0px;}
+	99.999% {background-position: -1650px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
+
+.spriteMonsterBodyHurt
+{
+	height: 103px;
+	-webkit-animation-name: spriteMonsterBodyHurt;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterBodyHurt_first{ background: url(../img/monster/hurt/body/monsterBodyHurt1.png) no-repeat 0 0;}
+.spriteMonsterBodyHurt_second{ background: url(../img/monster/hurt/body/monsterBodyHurt2.png) no-repeat 0 0;}
+.spriteMonsterBodyHurt_third{ background: url(../img/monster/hurt/body/monsterBodyHurt3.png) no-repeat 0 0;}
+
+
+@-webkit-keyframes spriteMonsterBodyHurt
+{
+	0% {background-position: 0px 0px;}
+	16.666% {background-position: 0px 0px;}
+	16.667% {background-position: -330px 0px;}
+	33.333% {background-position: -330px 0px;}
+	33.334% {background-position: -660px 0px;}
+	49.999% {background-position: -660px 0px;}
+	50% {background-position: -990px 0px;}
+	66.666% {background-position: -990px 0px;}
+	66.667% {background-position: -1320px 0px;}
+	83.333% {background-position: -1320px 0px;}
+	83.334% {background-position: -1650px 0px;}
+	99.999% {background-position: -1650px 0px;}
+	100% {background-position: 0px 0px;}
+
+}
+
+.spriteMonsterLegsHurt
+{
+	height: 49px;
+	-webkit-animation-name: spriteMonsterLegsHurt;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterLegsHurt_first{ background: url(../img/monster/hurt/legs/monsterLegsHurt1.png) no-repeat 0 0;}
+.spriteMonsterLegsHurt_second{ background: url(../img/monster/hurt/legs/monsterLegsHurt2.png) no-repeat 0 0;}
+.spriteMonsterLegsHurt_third{ background: url(../img/monster/hurt/legs/monsterLegsHurt3.png) no-repeat 0 0;}
+
+
+@-webkit-keyframes spriteMonsterLegsHurt
+{
+	0% {background-position: 0px 0px;}
+	16.666% {background-position: 0px 0px;}
+	16.667% {background-position: -330px 0px;}
+	33.333% {background-position: -330px 0px;}
+	33.334% {background-position: -660px 0px;}
+	49.999% {background-position: -660px 0px;}
+	50% {background-position: -990px 0px;}
+	66.666% {background-position: -990px 0px;}
+	66.667% {background-position: -1320px 0px;}
+	83.333% {background-position: -1320px 0px;}
+	83.334% {background-position: -1650px 0px;}
+	99.999% {background-position: -1650px 0px;}
 	100% {background-position: 0px 0px;}
 
 }

@@ -1,5 +1,4 @@
 class mylib{
-    constructor(){}
 
     static getRandomArrayElement(array){
         return array[Math.floor(Math.random() * array.length)];

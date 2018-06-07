@@ -44,6 +44,17 @@ class Game{
     }
 
     monsterKilled(){
+        const headsIdle = ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'];
+        const bodiesIdle = ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'];
+        const legsIdle = ['spriteMonsterLegsIdle_first', 'spriteMonsterLegsIdle_second','spriteMonsterLegsIdle_third'];
+        const spriteMonster = document.querySelector('.spriteMonster');
+        let x = headsIdle[this.monster.head];
+        spriteMonster.children[0].classList.remove(headsIdle[this.monster.head]);
+        x = bodiesIdle[this.monster.body];
+        spriteMonster.children[1].classList.remove(bodiesIdle[this.monster.body]);
+        x = legsIdle[this.monster.legs];
+        spriteMonster.children[2].classList.remove(legsIdle[this.monster.legs]);
+
         this.player.score +=1;
         this.monster = new Monster(this.player.score);
         this.monster.drawMonster(this.player);
