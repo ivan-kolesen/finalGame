@@ -1,5 +1,5 @@
 import mylib from "./mylib";
-import dictMonster from "./dict";
+import {dictMonster} from "./dict";
 
 class Monster{
     constructor(score){
@@ -11,6 +11,8 @@ class Monster{
         this.body;
         this.legs;
         this.audioFire = new Audio();
+        this.audioGrenadePin = new Audio();
+        this.audioGrenade = new Audio();
     }
 
     drawMonster(){
@@ -44,6 +46,12 @@ class Monster{
         this.audioFire.preload = 'auto';
         this.audioFire.volume = 1;
         this.audioFire.src = './audio/monsterFire.mp3';
+        this.audioGrenade.preload = 'auto';
+        this.audioGrenade.volume = 1;
+        this.audioGrenade.src = './audio/grenade.mp3';
+        this.audioGrenadePin.preload = 'auto';
+        this.audioGrenadePin.volume = 1;
+        this.audioGrenadePin.src = './audio/grenade0.mp3';
     }
 
     /*removes classes of idle parts of the monster and sets classes of fire parts of the monster*/
@@ -117,6 +125,8 @@ class Monster{
     }
 
     die(){
+        setTimeout(()=>{this.audioGrenadePin.play()}, 100);
+        setTimeout(()=>{this.audioGrenade.play()}, 400);
         const spriteMonster = document.querySelector('.spriteMonster');
         spriteMonster.children[0].classList.remove('spriteMonsterHeadIdle');
         spriteMonster.children[0].classList.remove(dictMonster.headsIdle[this.head]);

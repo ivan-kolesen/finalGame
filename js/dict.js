@@ -1,4 +1,4 @@
-const dictMonster = {
+export const dictMonster = {
     "headsIdle" : ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'],
     "bodiesIdle" : ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'],
     "legsIdle" : ['spriteMonsterLegsIdle_first', 'spriteMonsterLegsIdle_second','spriteMonsterLegsIdle_third'],
@@ -17,6 +17,16 @@ const dictMonster = {
     "thirdNames" : ["Vonuchkin", "Svininsky", "Zhirnidze", "Kakulko", "Soplivkin", "Gryaznulenko", "Potnyakovich"],
 
     "backgroundImages" : ['arena1', 'arena2', 'arena3', 'arena4']
-}
+};
 
-export default dictMonster;
+export const dictTranslateTask = {
+    "dog" : ["собака", "пес", "пёс"],
+    "cat" : ["кот", "кошка", "котэ"],
+    "house" : ["дом"],
+    "spell" : ["заклинание", "чары"],
+    "pig" : ["свинья", "поросенок", "поросёнок", "хрюшка"],
+    "bird" : ["птица"],
+    "towel" : ["полотенце"],
+    "table" : ["стол", "таблица"],
+    "flower" : ["цветок", "цвет"]
+};

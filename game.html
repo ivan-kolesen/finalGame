@@ -8,11 +8,11 @@
 <body>
   <section class="regPage">
     <h2>PLAY THE GAME!</h2>
-    <form>
+    <form onsubmit="return false;">
       <label>NAME:</label>
       <input id="playerName" type="text" placeholder="*your name" required>
+      <button id="btnStart" type="submit">START!</button>
     </form>
-    <button id="btnStart" type="button">START!</button>
   </section>
   <section class="gamePage">
     <div class="fighterNames">
@@ -60,9 +60,9 @@
   <section class="taskPage">
     <div class="modalWindow modalWindow__task">
       <h2 class="taskCondition"></h2>
-      <form>
+      <form onsubmit="return false;">
         <input id="answer" type="text" placeholder="your answer">
-        <button id="btnAnswer" type="button">ANSWER!</button>
+        <button id="btnAnswer" type="submit">ANSWER!</button>
       </form>
     </div>
   </section>

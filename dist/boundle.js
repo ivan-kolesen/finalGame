@@ -90,11 +90,13 @@
 /*!********************!*\
   !*** ./js/dict.js ***!
   \********************/
-/*! exports provided: default */
+/*! exports provided: dictMonster, dictTranslateTask */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictMonster", function() { return dictMonster; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictTranslateTask", function() { return dictTranslateTask; });
 const dictMonster = {
     "headsIdle" : ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'],
     "bodiesIdle" : ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'],
@@ -114,9 +116,20 @@ const dictMonster = {
     "thirdNames" : ["Vonuchkin", "Svininsky", "Zhirnidze", "Kakulko", "Soplivkin", "Gryaznulenko", "Potnyakovich"],
 
     "backgroundImages" : ['arena1', 'arena2', 'arena3', 'arena4']
-}
+};
 
-/* harmony default export */ __webpack_exports__["default"] = (dictMonster);
+const dictTranslateTask = {
+    "dog" : ["собака", "пес", "пёс"],
+    "cat" : ["кот", "кошка", "котэ"],
+    "house" : ["дом"],
+    "spell" : ["заклинание", "чары"],
+    "pig" : ["свинья", "поросенок", "поросёнок", "хрюшка"],
+    "bird" : ["птица"],
+    "towel" : ["полотенце"],
+    "table" : ["стол", "таблица"],
+    "flower" : ["цветок", "цвет"]
+};
+
 
 /***/ }),
 
@@ -145,6 +158,7 @@ class Game{
         this.player;
         this.monster;
         this.spell;
+        this.btnChooseSpell;
     }
 
 
@@ -160,36 +174,42 @@ class Game{
         this.monster.drawMonster(this.player);
 
         this.spell = new _spell__WEBPACK_IMPORTED_MODULE_2__["default"]();
-        btnChooseSpell.addEventListener('click', () => {this.spell.open()});
+        this.btnChooseSpell = this.spell.open.bind(this.spell);
+        btnChooseSpell.addEventListener('click', this.btnChooseSpell);
         btnAnswer.addEventListener('click', () => {this.setAnswer()});
 
     }
 
     setAnswer(){
-        this.spell.task.answer = answer.value;
-        answer.value = '';
+        this.spell.task.answer = answer.value.toString();
+        document.getElementById('answer').value = '';
         document.querySelector('.taskPage').style.display = "none";
+        btnChooseSpell.removeEventListener('click', this.btnChooseSpell);
         this.spell.cast(this.player, this.monster);
-        setTimeout(this.isAlive.bind(this), 2000)
+        setTimeout(this.isAlive.bind(this), 2000);
     }
 
     isAlive(){
         if(!this.monster.isAlive()){
             this.monster.die();
             setTimeout(()=>this.monster.stopDie(), 1999);
-            setTimeout(()=>this.monsterKilled(), 2000);
+            setTimeout(()=>this.nextMonster(), 2000);
         }
-        if(!this.player.isAlive()){
+        else if(!this.player.isAlive()){
             this.player.die();
-            setTimeout(()=>this.playerKilled(), 5000);
+            setTimeout(()=>this.finish(), 3000);
+        }
+        else{
+            btnChooseSpell.addEventListener('click', this.btnChooseSpell);
         }
     }
 
-    monsterKilled(){
+    nextMonster(){
         const spriteMonster = document.querySelector('.spriteMonster');
-        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_4__["default"].headsIdle[this.monster.head]);
-        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_4__["default"].bodiesIdle[this.monster.body]);
-        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_4__["default"].legsIdle[this.monster.legs]);
+        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_4__["dictMonster"].headsIdle[this.monster.head]);
+        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_4__["dictMonster"].bodiesIdle[this.monster.body]);
+        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_4__["dictMonster"].legsIdle[this.monster.legs]);
+        btnChooseSpell.addEventListener('click', this.btnChooseSpell);
 
         this.player.score +=1;
         this.monster = new _monster__WEBPACK_IMPORTED_MODULE_1__["default"](this.player.score);
@@ -198,10 +218,10 @@ class Game{
         this.player.drawHealth();
     }
 
-    playerKilled(){
+    finish(){
         document.querySelector('.gamePage').style.display = "none";
         document.querySelector('.scoresPage').style.display = "block";
-        localStorage.setItem('game' + Date.now(), this.player.name + ',' + this.player.score);
+        localStorage.setItem('game' + Date.now(), this.player.name + ',' + (this.player.score+1));
         _mylib__WEBPACK_IMPORTED_MODULE_3__["default"].createHighscoresTable();
     }
 
@@ -225,7 +245,6 @@ __webpack_require__.r(__webpack_exports__);
 
 let game = new _game_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
 let myGame = game.create.bind(game);
-btnStart.addEventListener('click', myGame);
 btnStart.addEventListener('click', myGame);
 
 /*let audio = new Audio();
@@ -263,6 +282,8 @@ class Monster{
         this.body;
         this.legs;
         this.audioFire = new Audio();
+        this.audioGrenadePin = new Audio();
+        this.audioGrenade = new Audio();
     }
 
     drawMonster(){
@@ -272,18 +293,18 @@ class Monster{
         this.createSounds();
 
         /*add new background and clear the previous*/
-        document.querySelector('.gamePage').classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].backgroundImages[this.score % _dict__WEBPACK_IMPORTED_MODULE_1__["default"].backgroundImages.length]);
-        document.querySelector('.gamePage').classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].backgroundImages[(this.score-1) % _dict__WEBPACK_IMPORTED_MODULE_1__["default"].backgroundImages.length]);
+        document.querySelector('.gamePage').classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].backgroundImages[this.score % _dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].backgroundImages.length]);
+        document.querySelector('.gamePage').classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].backgroundImages[(this.score-1) % _dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].backgroundImages.length]);
 
         /*get random numbers to take head, body, legs from dictionary by these numbers */
-        this.head = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, _dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsIdle.length-1);
-        this.body = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, _dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesIdle.length-1);
-        this.legs = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, _dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsIdle.length-1);
+        this.head = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, _dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsIdle.length-1);
+        this.body = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, _dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesIdle.length-1);
+        this.legs = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, _dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsIdle.length-1);
 
         /*draw the monster from taken head, body and legs*/
-        document.querySelector('.spriteMonsterHeadIdle').classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsIdle[this.head]);
-        document.querySelector('.spriteMonsterBodyIdle').classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesIdle[this.body]);
-        document.querySelector('.spriteMonsterLegsIdle').classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsIdle[this.legs]);
+        document.querySelector('.spriteMonsterHeadIdle').classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsIdle[this.head]);
+        document.querySelector('.spriteMonsterBodyIdle').classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesIdle[this.body]);
+        document.querySelector('.spriteMonsterLegsIdle').classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsIdle[this.legs]);
     }
 
     /*sets the green line of health and puts a number of health in html*/
@@ -296,6 +317,12 @@ class Monster{
         this.audioFire.preload = 'auto';
         this.audioFire.volume = 1;
         this.audioFire.src = './audio/monsterFire.mp3';
+        this.audioGrenade.preload = 'auto';
+        this.audioGrenade.volume = 1;
+        this.audioGrenade.src = './audio/grenade.mp3';
+        this.audioGrenadePin.preload = 'auto';
+        this.audioGrenadePin.volume = 1;
+        this.audioGrenadePin.src = './audio/grenade0.mp3';
     }
 
     /*removes classes of idle parts of the monster and sets classes of fire parts of the monster*/
@@ -303,17 +330,17 @@ class Monster{
         this.audioFire.play();
         const spriteMonster = document.querySelector('.spriteMonster');
         spriteMonster.children[0].classList.remove('spriteMonsterHeadIdle');
-        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsIdle[this.head]);
+        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsIdle[this.head]);
         spriteMonster.children[1].classList.remove('spriteMonsterBodyIdle');
-        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesIdle[this.body]);
+        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesIdle[this.body]);
         spriteMonster.children[2].classList.remove('spriteMonsterLegsIdle');
-        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsIdle[this.legs]);
+        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsIdle[this.legs]);
         spriteMonster.children[0].classList.add('spriteMonsterHeadFire');
-        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsFire[this.head]);
+        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsFire[this.head]);
         spriteMonster.children[1].classList.add('spriteMonsterBodyFire');
-        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesFire[this.body]);
+        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesFire[this.body]);
         spriteMonster.children[2].classList.add('spriteMonsterLegsFire');
-        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsFire[this.legs]);
+        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsFire[this.legs]);
 
     }
 
@@ -321,83 +348,85 @@ class Monster{
     stopFire(){
         const spriteMonster = document.querySelector('.spriteMonster');
         spriteMonster.children[0].classList.remove('spriteMonsterHeadFire');
-        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsFire[this.head]);
+        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsFire[this.head]);
         spriteMonster.children[1].classList.remove('spriteMonsterBodyFire');
-        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesFire[this.body]);
+        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesFire[this.body]);
         spriteMonster.children[2].classList.remove('spriteMonsterLegsFire');
-        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsFire[this.legs]);
+        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsFire[this.legs]);
         spriteMonster.children[0].classList.add('spriteMonsterHeadIdle');
-        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsIdle[this.head]);
+        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsIdle[this.head]);
         spriteMonster.children[1].classList.add('spriteMonsterBodyIdle');
-        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesIdle[this.body]);
+        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesIdle[this.body]);
         spriteMonster.children[2].classList.add('spriteMonsterLegsIdle');
-        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsIdle[this.legs]);
+        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsIdle[this.legs]);
     }
 
     /*removes classes of idle parts of the monster and sets classes of hurt parts of the monster*/
     hurt(){
         const spriteMonster = document.querySelector('.spriteMonster');
         spriteMonster.children[0].classList.remove('spriteMonsterHeadIdle');
-        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsIdle[this.head]);
+        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsIdle[this.head]);
         spriteMonster.children[1].classList.remove('spriteMonsterBodyIdle');
-        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesIdle[this.body]);
+        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesIdle[this.body]);
         spriteMonster.children[2].classList.remove('spriteMonsterLegsIdle');
-        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsIdle[this.legs]);
+        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsIdle[this.legs]);
         spriteMonster.children[0].classList.add('spriteMonsterHeadHurt');
-        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsHurt[this.head]);
+        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsHurt[this.head]);
         spriteMonster.children[1].classList.add('spriteMonsterBodyHurt');
-        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesHurt[this.body]);
+        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesHurt[this.body]);
         spriteMonster.children[2].classList.add('spriteMonsterLegsHurt');
-        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsHurt[this.legs]);
+        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsHurt[this.legs]);
     }
 
     /*removes classes of hurt parts of the monster and sets classes of idle parts of the monster*/
     stopHurt(){
         const spriteMonster = document.querySelector('.spriteMonster');
         spriteMonster.children[0].classList.remove('spriteMonsterHeadHurt');
-        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsHurt[this.head]);
+        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsHurt[this.head]);
         spriteMonster.children[1].classList.remove('spriteMonsterBodyHurt');
-        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesHurt[this.body]);
+        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesHurt[this.body]);
         spriteMonster.children[2].classList.remove('spriteMonsterLegsHurt');
-        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsHurt[this.legs]);
+        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsHurt[this.legs]);
         spriteMonster.children[0].classList.add('spriteMonsterHeadIdle');
-        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsIdle[this.head]);
+        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsIdle[this.head]);
         spriteMonster.children[1].classList.add('spriteMonsterBodyIdle');
-        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesIdle[this.body]);
+        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesIdle[this.body]);
         spriteMonster.children[2].classList.add('spriteMonsterLegsIdle');
-        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsIdle[this.legs]);
+        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsIdle[this.legs]);
     }
 
     die(){
+        setTimeout(()=>{this.audioGrenadePin.play()}, 100);
+        setTimeout(()=>{this.audioGrenade.play()}, 400);
         const spriteMonster = document.querySelector('.spriteMonster');
         spriteMonster.children[0].classList.remove('spriteMonsterHeadIdle');
-        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsIdle[this.head]);
+        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsIdle[this.head]);
         spriteMonster.children[1].classList.remove('spriteMonsterBodyIdle');
-        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesIdle[this.body]);
+        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesIdle[this.body]);
         spriteMonster.children[2].classList.remove('spriteMonsterLegsIdle');
-        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsIdle[this.legs]);
+        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsIdle[this.legs]);
         spriteMonster.children[0].classList.add('spriteMonsterHeadDie');
-        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsDie[this.head]);
+        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsDie[this.head]);
         spriteMonster.children[1].classList.add('spriteMonsterBodyDie');
-        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesDie[this.body]);
+        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesDie[this.body]);
         spriteMonster.children[2].classList.add('spriteMonsterLegsDie');
-        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsDie[this.legs]);
+        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsDie[this.legs]);
     }
 
     stopDie(){
         const spriteMonster = document.querySelector('.spriteMonster');
         spriteMonster.children[0].classList.remove('spriteMonsterHeadDie');
-        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsDie[this.head]);
+        spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsDie[this.head]);
         spriteMonster.children[1].classList.remove('spriteMonsterBodyDie');
-        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesDie[this.body]);
+        spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesDie[this.body]);
         spriteMonster.children[2].classList.remove('spriteMonsterLegsDie');
-        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsDie[this.legs]);
+        spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsDie[this.legs]);
         spriteMonster.children[0].classList.add('spriteMonsterHeadIdle');
-        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].headsIdle[this.head]);
+        spriteMonster.children[0].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].headsIdle[this.head]);
         spriteMonster.children[1].classList.add('spriteMonsterBodyIdle');
-        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].bodiesIdle[this.body]);
+        spriteMonster.children[1].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].bodiesIdle[this.body]);
         spriteMonster.children[2].classList.add('spriteMonsterLegsIdle');
-        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].legsIdle[this.legs]);
+        spriteMonster.children[2].classList.add(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].legsIdle[this.legs]);
     }
 
 
@@ -408,9 +437,9 @@ class Monster{
 
     /*generates the monster's name from three parts*/
     static generateName(){
-        const chosenFirstName = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].firstNames);
-        const chosenSecondName = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].secondNames);
-        const chosenThirdName = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(_dict__WEBPACK_IMPORTED_MODULE_1__["default"].thirdNames);
+        const chosenFirstName = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].firstNames);
+        const chosenSecondName = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].secondNames);
+        const chosenThirdName = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(_dict__WEBPACK_IMPORTED_MODULE_1__["dictMonster"].thirdNames);
         return chosenFirstName + ' ' + chosenSecondName + ' ' + chosenThirdName;
     }
 
@@ -666,17 +695,19 @@ class Spell{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mylib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mylib */ "./js/mylib.js");
+/* harmony import */ var _dict__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dict */ "./js/dict.js");
+
 
 
 class Task{
     constructor(){
         this.condition;
-        this.solution;
+        this.solution = [];
         this.answer;
     }
 
     generate(){
-        const tasks = [this.arithmetics];
+        const tasks = [this.arithmetics, this.translate];
         const currentTask = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(tasks).bind(this);
         currentTask();
 
@@ -688,16 +719,21 @@ class Task{
         const operations = ['+', '-', '*', '/'];
         const operation = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(operations);
         this.condition = firstNumber + operation + secondNumber;
-        this.solution = eval(this.condition);
+        this.solution.push(eval(this.condition).toString());
         document.querySelector('.taskCondition').innerHTML = "solve the task:<br>" + this.condition;
     }
 
     translate(){
-        document.querySelector('.taskCondition').innerHTML = "you win";
+        const arrayOfWords = Object.keys(_dict__WEBPACK_IMPORTED_MODULE_1__["dictTranslateTask"]);
+        const arrayOfWordsLength = arrayOfWords.length;
+        this.condition = arrayOfWords[_mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, arrayOfWordsLength-1)];
+        this.solution = _dict__WEBPACK_IMPORTED_MODULE_1__["dictTranslateTask"][this.condition];
+
+        document.querySelector('.taskCondition').innerHTML = "translate into russian:<br>" + this.condition;
     }
 
     isSolved(){
-        return this.solution == this.answer;
+        return this.solution.indexOf(this.answer.toLowerCase()) > -1;
     }
 
 }
