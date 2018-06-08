@@ -8,7 +8,7 @@ class Task{
     }
 
     generate(){
-        const tasks = [this.arithmetics, this.arithmetics];
+        const tasks = [this.arithmetics];
         const currentTask = mylib.getRandomArrayElement(tasks).bind(this);
         currentTask();
 
@@ -25,7 +25,7 @@ class Task{
     }
 
     translate(){
-        console.log("you win");
+        document.querySelector('.taskCondition').innerHTML = "you win";
     }
 
     isSolved(){

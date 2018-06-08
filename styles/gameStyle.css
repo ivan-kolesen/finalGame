@@ -229,6 +229,19 @@ td{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 .spritePlayer{
 	position: absolute;
 	left: 10vw;
@@ -243,13 +256,13 @@ td{
 .spritePlayerIdle
 {
 	background: url(../img/spritePlayer.png) no-repeat 0 0;
-	-webkit-animation-name: spritePlayerIdle;
+	-webkit-animation-name: sprite8Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
 }
 
-@-webkit-keyframes spritePlayerIdle
+@-webkit-keyframes sprite8Frames
 {
 	0% {background-position: 0px 0px;}
 	12.5% {background-position: 0px 0px;}
@@ -274,38 +287,13 @@ td{
 .spritePlayerFire
 {
 	background: url(../img/spritePlayerFire.png) no-repeat 0 0;
-	-webkit-animation-name: spritePlayerFire;
+	-webkit-animation-name: sprite5Frames;
 	-webkit-animation-duration: 300ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
 }
 
-@-webkit-keyframes spritePlayerFire
-{
-	0% {background-position: 0px 0px;}
-	20% {background-position: 0px 0px;}
-	20.001% {background-position: -340px 0px;}
-	40% {background-position: -340px 0px;}
-	40.001% {background-position: -680px 0px;}
-	60% {background-position: -680px 0px;}
-	60.001% {background-position: -1020px 0px;}
-	80% {background-position: -1020px 0px;}
-	80.001% {background-position: -1360px 0px;}
-	99.999% {background-position: -1360px 0px;}
-	100% {background-position: 0px 0px;}
-
-}
-
-.spritePlayerHeal
-{
-	background: url(../img/spritePlayerHeal1.png) no-repeat 0 0;
-	-webkit-animation-name: spritePlayerHeal;
-	-webkit-animation-duration: 300ms;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: linear;
-}
-
-@-webkit-keyframes spritePlayerHeal
+@-webkit-keyframes sprite5Frames
 {
 	0% {background-position: 0px 0px;}
 	20% {background-position: 0px 0px;}
@@ -321,28 +309,39 @@ td{
 
 }
 
+.spritePlayerHeal
+{
+	background: url(../img/spritePlayerHeal1.png) no-repeat 0 0;
+	-webkit-animation-name: sprite5Frames;
+	-webkit-animation-duration: 300ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+
+
 .spritePlayerHurt
 {
 	background: url(../img/spritePlayerHurt.png) no-repeat 0 0;
-	-webkit-animation-name: spritePlayerHurt;
+	-webkit-animation-name: sprite6Frames;
 	-webkit-animation-duration: 350ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
 }
 
-@-webkit-keyframes spritePlayerHurt
+@-webkit-keyframes sprite6Frames
 {
 	0% {background-position: 0px 0px;}
-	16.666% {background-position: 0px 0px;}
-	16.667% {background-position: -330px 0px;}
-	33.333% {background-position: -330px 0px;}
-	33.334% {background-position: -660px 0px;}
+	16% {background-position: 0px 0px;}
+	16.001% {background-position: -330px 0px;}
+	33% {background-position: -330px 0px;}
+	33.001% {background-position: -660px 0px;}
 	49.999% {background-position: -660px 0px;}
 	50% {background-position: -990px 0px;}
-	66.666% {background-position: -990px 0px;}
-	66.667% {background-position: -1320px 0px;}
-	83.333% {background-position: -1320px 0px;}
-	83.334% {background-position: -1650px 0px;}
+	66% {background-position: -990px 0px;}
+	66.001% {background-position: -1320px 0px;}
+	83% {background-position: -1320px 0px;}
+	83.001% {background-position: -1650px 0px;}
 	99.999% {background-position: -1650px 0px;}
 	100% {background-position: 0px 0px;}
 
@@ -351,13 +350,13 @@ td{
 .spritePlayerDie
 {
 	background: url(../img/spritePlayerDie.png) no-repeat 0 0;
-	-webkit-animation-name: spritePlayerDie;
+	-webkit-animation-name: sprite7Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: 5;
 	-webkit-animation-timing-function: linear;
 }
 
-@-webkit-keyframes spritePlayerDie
+@-webkit-keyframes sprite7Frames
 {
 	0% {background-position: 0px 0px;}
 	14.285% {background-position: 0px 0px;}
@@ -392,7 +391,7 @@ td{
 .spriteMonsterHeadIdle
 {
 	height: 101px;
-	-webkit-animation-name: spriteMonsterHeadIdle;
+	-webkit-animation-name: sprite8Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
@@ -402,31 +401,12 @@ td{
 .spriteMonsterHeadIdle_second{ background: url(../img/monster/idle/heads/monsterHeadIdle2.png) no-repeat 0 0;}
 .spriteMonsterHeadIdle_third{ background: url(../img/monster/idle/heads/monsterHeadIdle3.png) no-repeat 0 0;}
 
-@-webkit-keyframes spriteMonsterHeadIdle
-{
-	0% {background-position: 0px 0px;}
-	12.5% {background-position: 0px 0px;}
-	12.501% {background-position: -330px 0px;}
-	25% {background-position: -330px 0px;}
-	25.001% {background-position: -660px 0px;}
-	37.5% {background-position: -660px 0px;}
-	37.501% {background-position: -990px 0px;}
-	50% {background-position: -990px 0px;}
-	50.001% {background-position: -1320px 0px;}
-	62.5% {background-position: -1320px 0px;}
-	62.501% {background-position: -1650px 0px;}
-	75% {background-position: -1650px 0px;}
-	75.001% {background-position: -1980px 0px;}
-	87.5% {background-position: -1980px 0px;}
-	87.501% {background-position: -2310px 0px;}
-	99.999% {background-position: -2310px 0px;}
-	100% {background-position: 0px 0px;}
-}
+
 
 .spriteMonsterBodyIdle
 {
 	height: 100px;
-	-webkit-animation-name: spriteMonsterBodyIdle;
+	-webkit-animation-name: sprite8Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
@@ -436,31 +416,12 @@ td{
 .spriteMonsterBodyIdle_second{ background: url(../img/monster/idle/bodies/monsterBodyIdle2.png) no-repeat 0 0;}
 .spriteMonsterBodyIdle_third{ background: url(../img/monster/idle/bodies/monsterBodyIdle3.png) no-repeat 0 0;}
 
-@-webkit-keyframes spriteMonsterBodyIdle
-{
-	0% {background-position: 0px 0px;}
-	12.5% {background-position: 0px 0px;}
-	12.501% {background-position: -330px 0px;}
-	25% {background-position: -330px 0px;}
-	25.001% {background-position: -660px 0px;}
-	37.5% {background-position: -660px 0px;}
-	37.501% {background-position: -990px 0px;}
-	50% {background-position: -990px 0px;}
-	50.001% {background-position: -1320px 0px;}
-	62.5% {background-position: -1320px 0px;}
-	62.501% {background-position: -1650px 0px;}
-	75% {background-position: -1650px 0px;}
-	75.001% {background-position: -1980px 0px;}
-	87.5% {background-position: -1980px 0px;}
-	87.501% {background-position: -2310px 0px;}
-	99.999% {background-position: -2310px 0px;}
-	100% {background-position: 0px 0px;}
-}
+
 
 .spriteMonsterLegsIdle
 {
 	height: 49px;
-	-webkit-animation-name: spriteMonsterLegsIdle;
+	-webkit-animation-name: sprite8Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
@@ -470,26 +431,6 @@ td{
 .spriteMonsterLegsIdle_second{ background: url(../img/monster/idle/legs/monsterLegsIdle2.png) no-repeat 0 0;}
 .spriteMonsterLegsIdle_third{ background: url(../img/monster/idle/legs/monsterLegsIdle3.png) no-repeat 0 0;}
 
-@-webkit-keyframes spriteMonsterLegsIdle
-{
-	0% {background-position: 0px 0px;}
-	12.5% {background-position: 0px 0px;}
-	12.501% {background-position: -330px 0px;}
-	25% {background-position: -330px 0px;}
-	25.001% {background-position: -660px 0px;}
-	37.5% {background-position: -660px 0px;}
-	37.501% {background-position: -990px 0px;}
-	50% {background-position: -990px 0px;}
-	50.001% {background-position: -1320px 0px;}
-	62.5% {background-position: -1320px 0px;}
-	62.501% {background-position: -1650px 0px;}
-	75% {background-position: -1650px 0px;}
-	75.001% {background-position: -1980px 0px;}
-	87.5% {background-position: -1980px 0px;}
-	87.501% {background-position: -2310px 0px;}
-	99.999% {background-position: -2310px 0px;}
-	100% {background-position: 0px 0px;}
-}
 
 
 
@@ -497,7 +438,7 @@ td{
 .spriteMonsterHeadFire
 {
 	height: 101px;
-	-webkit-animation-name: spriteMonsterHeadFire;
+	-webkit-animation-name: sprite5Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
@@ -508,26 +449,12 @@ td{
 .spriteMonsterHeadFire_third{ background: url(../img/monster/fire/head/monsterHeadFire3.png) no-repeat 0 0;}
 
 
-@-webkit-keyframes spriteMonsterHeadFire
-{
-	0% {background-position: 0px 0px;}
-	20% {background-position: 0px 0px;}
-	20.001% {background-position: -330px 0px;}
-	40% {background-position: -330px 0px;}
-	40.001% {background-position: -660px 0px;}
-	60% {background-position: -660px 0px;}
-	60.001% {background-position: -990px 0px;}
-	80% {background-position: -990px 0px;}
-	80.001% {background-position: -1320px 0px;}
-	99.999% {background-position: -1320px 0px;}
-	100% {background-position: 0px 0px;}
 
-}
 
 .spriteMonsterBodyFire
 {
 	height: 102px;
-	-webkit-animation-name: spriteMonsterBodyFire;
+	-webkit-animation-name: sprite5Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
@@ -538,26 +465,11 @@ td{
 .spriteMonsterBodyFire_third{ background: url(../img/monster/fire/body/monsterBodyFire3.png) no-repeat 0 0;}
 
 
-@-webkit-keyframes spriteMonsterBodyFire
-{
-	0% {background-position: 0px 0px;}
-	20% {background-position: 0px 0px;}
-	20.001% {background-position: -330px 0px;}
-	40% {background-position: -330px 0px;}
-	40.001% {background-position: -660px 0px;}
-	60% {background-position: -660px 0px;}
-	60.001% {background-position: -990px 0px;}
-	80% {background-position: -990px 0px;}
-	80.001% {background-position: -1320px 0px;}
-	99.999% {background-position: -1320px 0px;}
-	100% {background-position: 0px 0px;}
-
-}
 
 .spriteMonsterLegsFire
 {
 	height: 47px;
-	-webkit-animation-name: spriteMonsterLegsFire;
+	-webkit-animation-name: sprite5Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
@@ -568,28 +480,13 @@ td{
 .spriteMonsterLegsFire_third{ background: url(../img/monster/fire/legs/monsterLegsFire3.png) no-repeat 0 0;}
 
 
-@-webkit-keyframes spriteMonsterLegsFire
-{
-	0% {background-position: 0px 0px;}
-	20% {background-position: 0px 0px;}
-	20.001% {background-position: -330px 0px;}
-	40% {background-position: -330px 0px;}
-	40.001% {background-position: -660px 0px;}
-	60% {background-position: -660px 0px;}
-	60.001% {background-position: -990px 0px;}
-	80% {background-position: -990px 0px;}
-	80.001% {background-position: -1320px 0px;}
-	99.999% {background-position: -1320px 0px;}
-	100% {background-position: 0px 0px;}
-
-}
 
 
 
 .spriteMonsterHeadHurt
 {
 	height: 96px;
-	-webkit-animation-name: spriteMonsterHeadHurt;
+	-webkit-animation-name: sprite6Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
@@ -600,28 +497,11 @@ td{
 .spriteMonsterHeadHurt_third{ background: url(../img/monster/hurt/head/monsterHeadHurt3.png) no-repeat 0 0;}
 
 
-@-webkit-keyframes spriteMonsterHeadHurt
-{
-	0% {background-position: 0px 0px;}
-	16.666% {background-position: 0px 0px;}
-	16.667% {background-position: -330px 0px;}
-	33.333% {background-position: -330px 0px;}
-	33.334% {background-position: -660px 0px;}
-	49.999% {background-position: -660px 0px;}
-	50% {background-position: -990px 0px;}
-	66.666% {background-position: -990px 0px;}
-	66.667% {background-position: -1320px 0px;}
-	83.333% {background-position: -1320px 0px;}
-	83.334% {background-position: -1650px 0px;}
-	99.999% {background-position: -1650px 0px;}
-	100% {background-position: 0px 0px;}
-
-}
 
 .spriteMonsterBodyHurt
 {
 	height: 103px;
-	-webkit-animation-name: spriteMonsterBodyHurt;
+	-webkit-animation-name: sprite6Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
@@ -632,28 +512,11 @@ td{
 .spriteMonsterBodyHurt_third{ background: url(../img/monster/hurt/body/monsterBodyHurt3.png) no-repeat 0 0;}
 
 
-@-webkit-keyframes spriteMonsterBodyHurt
-{
-	0% {background-position: 0px 0px;}
-	16.666% {background-position: 0px 0px;}
-	16.667% {background-position: -330px 0px;}
-	33.333% {background-position: -330px 0px;}
-	33.334% {background-position: -660px 0px;}
-	49.999% {background-position: -660px 0px;}
-	50% {background-position: -990px 0px;}
-	66.666% {background-position: -990px 0px;}
-	66.667% {background-position: -1320px 0px;}
-	83.333% {background-position: -1320px 0px;}
-	83.334% {background-position: -1650px 0px;}
-	99.999% {background-position: -1650px 0px;}
-	100% {background-position: 0px 0px;}
-
-}
 
 .spriteMonsterLegsHurt
 {
 	height: 49px;
-	-webkit-animation-name: spriteMonsterLegsHurt;
+	-webkit-animation-name: sprite6Frames;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
@@ -664,20 +527,93 @@ td{
 .spriteMonsterLegsHurt_third{ background: url(../img/monster/hurt/legs/monsterLegsHurt3.png) no-repeat 0 0;}
 
 
-@-webkit-keyframes spriteMonsterLegsHurt
+
+.spriteMonsterHeadDie
+{
+	margin-bottom: -1px;
+	height: 98px;
+	-webkit-animation-name: sprite20Frames;
+	-webkit-animation-duration: 2000ms;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterHeadDie_first{ background: url(../img/monster/die/head/monsterHeadDie1.png) no-repeat 0 0;}
+.spriteMonsterHeadDie_second{ background: url(../img/monster/die/head/monsterHeadDie2.png) no-repeat 0 0;}
+.spriteMonsterHeadDie_third{ background: url(../img/monster/die/head/monsterHeadDie3.png) no-repeat 0 0;}
+
+
+
+.spriteMonsterBodyDie
+{
+	height: 108px;
+	-webkit-animation-name: sprite20Frames;
+	-webkit-animation-duration: 2000ms;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterBodyDie_first{ background: url(../img/monster/die/body/monsterBodyDie1.png) no-repeat 0 0;}
+.spriteMonsterBodyDie_second{ background: url(../img/monster/die/body/monsterBodyDie2.png) no-repeat 0 0;}
+.spriteMonsterBodyDie_third{ background: url(../img/monster/die/body/monsterBodyDie3.png) no-repeat 0 0;}
+
+
+
+.spriteMonsterLegsDie
+{
+	margin-top: -2px;
+	height: 47px;
+	-webkit-animation-name: sprite20Frames;
+	-webkit-animation-duration: 2000ms;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterLegsDie_first{ background: url(../img/monster/die/legs/monsterLegsDie1.png) no-repeat 0 0;}
+.spriteMonsterLegsDie_second{ background: url(../img/monster/die/legs/monsterLegsDie2.png) no-repeat 0 0;}
+.spriteMonsterLegsDie_third{ background: url(../img/monster/die/legs/monsterLegsDie3.png) no-repeat 0 0;}
+
+
+@-webkit-keyframes sprite20Frames
 {
 	0% {background-position: 0px 0px;}
-	16.666% {background-position: 0px 0px;}
-	16.667% {background-position: -330px 0px;}
-	33.333% {background-position: -330px 0px;}
-	33.334% {background-position: -660px 0px;}
-	49.999% {background-position: -660px 0px;}
-	50% {background-position: -990px 0px;}
-	66.666% {background-position: -990px 0px;}
-	66.667% {background-position: -1320px 0px;}
-	83.333% {background-position: -1320px 0px;}
-	83.334% {background-position: -1650px 0px;}
-	99.999% {background-position: -1650px 0px;}
-	100% {background-position: 0px 0px;}
-
+	5% {background-position: 0px 0px;}
+	5.001% {background-position: -330px 0px;}
+	10% {background-position: -330px 0px;}
+	10.001% {background-position: -660px 0px;}
+	15% {background-position: -660px 0px;}
+	15.001% {background-position: -990px 0px;}
+	20% {background-position: -990px 0px;}
+	20.001% {background-position: -1320px 0px;}
+	25% {background-position: -1320px 0px;}
+	25.001% {background-position: -1650px 0px;}
+	30% {background-position: -1650px 0px;}
+	30.001% {background-position: -1980px 0px;}
+	35% {background-position: -1980px 0px;}
+	35.001% {background-position: -2310px 0px;}
+	40% {background-position: -2310px 0px;}
+	40.001% {background-position: -2640px 0px;}
+	45% {background-position: -2640px 0px;}
+	45.001% {background-position: -2970px 0px;}
+	50% {background-position: -2970px 0px;}
+	50.001% {background-position: -3300px 0px;}
+	55% {background-position: -3300px 0px;}
+	55.001% {background-position: -3630px 0px;}
+	60% {background-position: -3630px 0px;}
+	60.001% {background-position: -3960px 0px;}
+	65% {background-position: -3960px 0px;}
+	65.001% {background-position: -4290px 0px;}
+	70% {background-position: -4290px 0px;}
+	70.001% {background-position: -4620px 0px;}
+	75% {background-position: -4620px 0px;}
+	75.001% {background-position: -4950px 0px;}
+	80% {background-position: -4950px 0px;}
+	80.001% {background-position: -5280px 0px;}
+	85% {background-position: -5280px 0px;}
+	85.001% {background-position: -5610px 0px;}
+	90% {background-position: -5610px 0px;}
+	90.001% {background-position: -5940px 0px;}
+	95% {background-position: -5940px 0px;}
+	95.001% {background-position: -6270px 0px;}
+	100% {background-position: -6270px 0px;}
 }

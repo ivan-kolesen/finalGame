@@ -1,13 +1,15 @@
 class mylib{
-
+    /*returns a random element of the passed array*/
     static getRandomArrayElement(array){
         return array[Math.floor(Math.random() * array.length)];
     }
 
+    /*returns a random integer from a gap between min and max*/
     static getRandomFromTo(min, max){
         return Math.floor(Math.random() * (max - min + 1)) + min;;
     }
 
+    /*draws a table with highscores*/
     static createHighscoresTable() {
         let recordsArray = mylib.getHighscores();
         let recordsTable = document.querySelector('table');
@@ -23,6 +25,7 @@ class mylib{
         }
     }
 
+    /*returns a sorted array of 10 top scores*/
     static getHighscores() {
         let allScores = [];
         let storageCount = localStorage.length;
@@ -38,6 +41,7 @@ class mylib{
         return allScores;
     }
 
+    /*bubble sort for two-dimensional array*/
     static bubbleSort2D(array) {
         let length = array.length;
         for (let i = 0; i < length - 1; i++) {

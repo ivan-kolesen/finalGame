@@ -2,6 +2,7 @@ import Player from "./player";
 import Monster from "./monster";
 import Spell from "./spell";
 import mylib from "./mylib";
+import dictMonster from "./dict";
 
 class Game{
     constructor(){
@@ -33,33 +34,32 @@ class Game{
         answer.value = '';
         document.querySelector('.taskPage').style.display = "none";
         this.spell.cast(this.player, this.monster);
+        setTimeout(this.isAlive.bind(this), 2000)
+    }
+
+    isAlive(){
         if(!this.monster.isAlive()){
-            setTimeout(()=>this.monsterKilled(), 5000);
+            this.monster.die();
+            setTimeout(()=>this.monster.stopDie(), 1999);
+            setTimeout(()=>this.monsterKilled(), 2000);
         }
         if(!this.player.isAlive()){
             this.player.die();
             setTimeout(()=>this.playerKilled(), 5000);
         }
-
     }
 
     monsterKilled(){
-        const headsIdle = ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'];
-        const bodiesIdle = ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'];
-        const legsIdle = ['spriteMonsterLegsIdle_first', 'spriteMonsterLegsIdle_second','spriteMonsterLegsIdle_third'];
         const spriteMonster = document.querySelector('.spriteMonster');
-        let x = headsIdle[this.monster.head];
-        spriteMonster.children[0].classList.remove(headsIdle[this.monster.head]);
-        x = bodiesIdle[this.monster.body];
-        spriteMonster.children[1].classList.remove(bodiesIdle[this.monster.body]);
-        x = legsIdle[this.monster.legs];
-        spriteMonster.children[2].classList.remove(legsIdle[this.monster.legs]);
+        spriteMonster.children[0].classList.remove(dictMonster.headsIdle[this.monster.head]);
+        spriteMonster.children[1].classList.remove(dictMonster.bodiesIdle[this.monster.body]);
+        spriteMonster.children[2].classList.remove(dictMonster.legsIdle[this.monster.legs]);
 
         this.player.score +=1;
         this.monster = new Monster(this.player.score);
         this.monster.drawMonster(this.player);
         this.player.health = Math.min(this.player.health+mylib.getRandomFromTo(20, 25+this.player.score*5), this.player.startHealth);
-        this.player.setHealth();
+        this.player.drawHealth();
     }
 
     playerKilled(){

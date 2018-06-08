@@ -4,19 +4,32 @@ class Player{
         this.startHealth = 100;
         this.health = this.startHealth;
         this.score = 0;
+        this.audioFire = new Audio();
+        this.audioHeal = new Audio();
     }
 
     drawPlayer(){
         document.querySelector('.playerName').innerHTML = this.name;
-        this.setHealth();
+        this.drawHealth();
+        this.createSounds();
     }
 
-    setHealth(){
+    drawHealth(){
         document.querySelector('.playerHealthRemain').style.width = this.health/this.startHealth*100 + "%";
         document.querySelector('.playerHealthRemain').innerHTML = this.health;
     }
 
+    createSounds(){
+        this.audioFire.preload = 'auto';
+        this.audioFire.volume = 1;
+        this.audioFire.src = './audio/playerFire.mp3';
+        this.audioHeal.preload = 'auto';
+        this.audioHeal.volume = 1;
+        this.audioHeal.src = './audio/playerHeal.mp3';
+    }
+
     fire(){
+        this.audioFire.play();
         document.querySelector('.spritePlayer').classList.remove('spritePlayerIdle');
         document.querySelector('.spritePlayer').classList.add('spritePlayerFire');
     }
@@ -27,6 +40,7 @@ class Player{
     }
 
     healing(){
+        this.audioHeal.play();
         document.querySelector('.spritePlayer').classList.remove('spritePlayerIdle');
         document.querySelector('.spritePlayer').classList.add('spritePlayerHeal');
     }
