@@ -31,14 +31,13 @@
     <form>
       <button id="btnChooseSpell" type="button">Choose spell!</button>
     </form>
-    <div class="spritePlayer spritePlayerIdle"></div>
+    <div class="spritePlayer spritePlayerIdle" draggable="true"></div>
     <div class="spriteMonster">
       <div class="spriteMonsterHeadIdle"></div>
       <div class="spriteMonsterBodyIdle"></div>
       <div class="spriteMonsterLegsIdle"></div>
     </div>
   </section>
-
   <section class="scoresPage">
     <table>
       <tr>
@@ -59,7 +58,8 @@
   </section>
   <section class="taskPage">
     <div class="modalWindow modalWindow__task">
-      <h2 class="taskCondition"></h2>
+      <h2 class="taskDescription"></h2>
+      <div id="tempMedia"></div>
       <form onsubmit="return false;">
         <input id="answer" type="text" placeholder="your answer">
         <button id="btnAnswer" type="submit">ANSWER!</button>

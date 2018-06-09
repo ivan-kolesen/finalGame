@@ -10,7 +10,6 @@ class Spell{
     /*opens window with choise of spell type*/
     open(){
         document.querySelector('.spellPage').style.display = "block";
-        document.querySelector('.spells').addEventListener('click', () => {this.chooseSpell(event)});
     }
 
     /*sets the chosen spell type into object's property and creates a task*/
@@ -24,7 +23,7 @@ class Spell{
 
     /*if the chosen type of spell was "atack", the player atacks the monster or the monster atacks the player */
     atack(atacking, atacked){
-        atacked.health = Math.max(atacked.health - mylib.getRandomFromTo(20, 25+atacked.score*5), 0);
+        atacked.health = Math.max(atacked.health - mylib.getRandomFromTo(20, 25+atacked.score), 0);
         atacked.drawHealth();
         atacking.fire();
         atacked.hurt();

@@ -125,7 +125,7 @@ class Monster{
     }
 
     die(){
-        setTimeout(()=>{this.audioGrenadePin.play()}, 100);
+        setTimeout(()=>{this.audioGrenadePin.play()}, 130);
         setTimeout(()=>{this.audioGrenade.play()}, 400);
         const spriteMonster = document.querySelector('.spriteMonster');
         spriteMonster.children[0].classList.remove('spriteMonsterHeadIdle');

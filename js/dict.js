@@ -30,3 +30,13 @@ export const dictTranslateTask = {
     "table" : ["стол", "таблица"],
     "flower" : ["цветок", "цвет"]
 };
+
+export const dictListeningTask = {
+    "audio/elephant.mp3" : "elephant",
+    "audio/forest.mp3" : "forest",
+    "audio/mushroom.mp3" : "mushroom",
+    "audio/ocean.mp3" : "ocean",
+    "audio/rainbow.mp3" : "rainbow",
+    "audio/strawberry.mp3" : "strawberry",
+    "audio/tomato.mp3" : "tomato"
+};

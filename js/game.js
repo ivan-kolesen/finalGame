@@ -12,7 +12,6 @@ class Game{
         this.btnChooseSpell;
     }
 
-
     create(){
         document.querySelector('.regPage').style.display = "none";
         document.querySelector('.gamePage').style.display = "block";
@@ -27,13 +26,12 @@ class Game{
         this.spell = new Spell();
         this.btnChooseSpell = this.spell.open.bind(this.spell);
         btnChooseSpell.addEventListener('click', this.btnChooseSpell);
+        document.querySelector('.spells').addEventListener('click', () => {this.spell.chooseSpell(event)});
         btnAnswer.addEventListener('click', () => {this.setAnswer()});
-
     }
 
     setAnswer(){
         this.spell.task.answer = answer.value.toString();
-        document.getElementById('answer').value = '';
         document.querySelector('.taskPage').style.display = "none";
         btnChooseSpell.removeEventListener('click', this.btnChooseSpell);
         this.spell.cast(this.player, this.monster);
@@ -60,19 +58,19 @@ class Game{
         spriteMonster.children[0].classList.remove(dictMonster.headsIdle[this.monster.head]);
         spriteMonster.children[1].classList.remove(dictMonster.bodiesIdle[this.monster.body]);
         spriteMonster.children[2].classList.remove(dictMonster.legsIdle[this.monster.legs]);
-        btnChooseSpell.addEventListener('click', this.btnChooseSpell);
 
         this.player.score +=1;
         this.monster = new Monster(this.player.score);
         this.monster.drawMonster(this.player);
         this.player.health = Math.min(this.player.health+mylib.getRandomFromTo(20, 25+this.player.score*5), this.player.startHealth);
         this.player.drawHealth();
+        btnChooseSpell.addEventListener('click', this.btnChooseSpell);
     }
 
     finish(){
         document.querySelector('.gamePage').style.display = "none";
         document.querySelector('.scoresPage').style.display = "block";
-        localStorage.setItem('game' + Date.now(), this.player.name + ',' + (this.player.score+1));
+        localStorage.setItem('game' + Date.now(), this.player.name + ',' + (this.player.score));
         mylib.createHighscoresTable();
     }
 

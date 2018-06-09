@@ -1,5 +1,5 @@
 import mylib from "./mylib";
-import {dictTranslateTask} from "./dict";
+import {dictTranslateTask, dictListeningTask} from "./dict";
 
 class Task{
     constructor(){
@@ -9,7 +9,9 @@ class Task{
     }
 
     generate(){
-        const tasks = [this.arithmetics, this.translate];
+        document.getElementById('tempMedia').innerHTML = '';
+        document.getElementById('answer').value = '';
+        const tasks = [this.arithmetics, this.translate, this.listening];
         const currentTask = mylib.getRandomArrayElement(tasks).bind(this);
         currentTask();
 
@@ -22,7 +24,7 @@ class Task{
         const operation = mylib.getRandomArrayElement(operations);
         this.condition = firstNumber + operation + secondNumber;
         this.solution.push(eval(this.condition).toString());
-        document.querySelector('.taskCondition').innerHTML = "solve the task:<br>" + this.condition;
+        document.querySelector('.taskDescription').innerHTML = "solve the task:<br>" + this.condition;
     }
 
     translate(){
@@ -31,7 +33,20 @@ class Task{
         this.condition = arrayOfWords[mylib.getRandomFromTo(0, arrayOfWordsLength-1)];
         this.solution = dictTranslateTask[this.condition];
 
-        document.querySelector('.taskCondition').innerHTML = "translate into russian:<br>" + this.condition;
+        document.querySelector('.taskDescription').innerHTML = "translate into russian:<br>" + this.condition;
+    }
+
+    listening(){
+        const arrayOfWords = Object.keys(dictListeningTask);
+        const arrayOfWordsLength = arrayOfWords.length;
+        this.condition = arrayOfWords[mylib.getRandomFromTo(0, arrayOfWordsLength-1)];
+        this.solution.push(dictListeningTask[this.condition]);
+
+        const insertingAudio = document.createElement("audio");
+        insertingAudio.setAttribute("src", this.condition);
+        insertingAudio.setAttribute("controls", "");
+        document.getElementById('tempMedia').appendChild(insertingAudio);
+        document.querySelector('.taskDescription').innerHTML = "type the word you heard";
     }
 
     isSolved(){

@@ -90,13 +90,14 @@
 /*!********************!*\
   !*** ./js/dict.js ***!
   \********************/
-/*! exports provided: dictMonster, dictTranslateTask */
+/*! exports provided: dictMonster, dictTranslateTask, dictListeningTask */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictMonster", function() { return dictMonster; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictTranslateTask", function() { return dictTranslateTask; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictListeningTask", function() { return dictListeningTask; });
 const dictMonster = {
     "headsIdle" : ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'],
     "bodiesIdle" : ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'],
@@ -130,6 +131,16 @@ const dictTranslateTask = {
     "flower" : ["цветок", "цвет"]
 };
 
+const dictListeningTask = {
+    "audio/elephant.mp3" : "elephant",
+    "audio/forest.mp3" : "forest",
+    "audio/mushroom.mp3" : "mushroom",
+    "audio/ocean.mp3" : "ocean",
+    "audio/rainbow.mp3" : "rainbow",
+    "audio/strawberry.mp3" : "strawberry",
+    "audio/tomato.mp3" : "tomato"
+};
+
 
 /***/ }),
 
@@ -161,7 +172,6 @@ class Game{
         this.btnChooseSpell;
     }
 
-
     create(){
         document.querySelector('.regPage').style.display = "none";
         document.querySelector('.gamePage').style.display = "block";
@@ -176,13 +186,12 @@ class Game{
         this.spell = new _spell__WEBPACK_IMPORTED_MODULE_2__["default"]();
         this.btnChooseSpell = this.spell.open.bind(this.spell);
         btnChooseSpell.addEventListener('click', this.btnChooseSpell);
+        document.querySelector('.spells').addEventListener('click', () => {this.spell.chooseSpell(event)});
         btnAnswer.addEventListener('click', () => {this.setAnswer()});
-
     }
 
     setAnswer(){
         this.spell.task.answer = answer.value.toString();
-        document.getElementById('answer').value = '';
         document.querySelector('.taskPage').style.display = "none";
         btnChooseSpell.removeEventListener('click', this.btnChooseSpell);
         this.spell.cast(this.player, this.monster);
@@ -209,19 +218,19 @@ class Game{
         spriteMonster.children[0].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_4__["dictMonster"].headsIdle[this.monster.head]);
         spriteMonster.children[1].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_4__["dictMonster"].bodiesIdle[this.monster.body]);
         spriteMonster.children[2].classList.remove(_dict__WEBPACK_IMPORTED_MODULE_4__["dictMonster"].legsIdle[this.monster.legs]);
-        btnChooseSpell.addEventListener('click', this.btnChooseSpell);
 
         this.player.score +=1;
         this.monster = new _monster__WEBPACK_IMPORTED_MODULE_1__["default"](this.player.score);
         this.monster.drawMonster(this.player);
         this.player.health = Math.min(this.player.health+_mylib__WEBPACK_IMPORTED_MODULE_3__["default"].getRandomFromTo(20, 25+this.player.score*5), this.player.startHealth);
         this.player.drawHealth();
+        btnChooseSpell.addEventListener('click', this.btnChooseSpell);
     }
 
     finish(){
         document.querySelector('.gamePage').style.display = "none";
         document.querySelector('.scoresPage').style.display = "block";
-        localStorage.setItem('game' + Date.now(), this.player.name + ',' + (this.player.score+1));
+        localStorage.setItem('game' + Date.now(), this.player.name + ',' + (this.player.score));
         _mylib__WEBPACK_IMPORTED_MODULE_3__["default"].createHighscoresTable();
     }
 
@@ -247,13 +256,15 @@ let game = new _game_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
 let myGame = game.create.bind(game);
 btnStart.addEventListener('click', myGame);
 
-/*let audio = new Audio();
-audio.volume = 0.3;
+/*
+let audio = new Audio();
+audio.volume = 0.1;
 audio.src = './audio/soundtrack.mp3';
 audio.autoplay = true;
-audio.loop = true;*/
+audio.loop = true;
 
 
+*/
 
 
 /***/ }),
@@ -396,7 +407,7 @@ class Monster{
     }
 
     die(){
-        setTimeout(()=>{this.audioGrenadePin.play()}, 100);
+        setTimeout(()=>{this.audioGrenadePin.play()}, 130);
         setTimeout(()=>{this.audioGrenade.play()}, 400);
         const spriteMonster = document.querySelector('.spriteMonster');
         spriteMonster.children[0].classList.remove('spriteMonsterHeadIdle');
@@ -636,7 +647,6 @@ class Spell{
     /*opens window with choise of spell type*/
     open(){
         document.querySelector('.spellPage').style.display = "block";
-        document.querySelector('.spells').addEventListener('click', () => {this.chooseSpell(event)});
     }
 
     /*sets the chosen spell type into object's property and creates a task*/
@@ -650,7 +660,7 @@ class Spell{
 
     /*if the chosen type of spell was "atack", the player atacks the monster or the monster atacks the player */
     atack(atacking, atacked){
-        atacked.health = Math.max(atacked.health - _mylib__WEBPACK_IMPORTED_MODULE_1__["default"].getRandomFromTo(20, 25+atacked.score*5), 0);
+        atacked.health = Math.max(atacked.health - _mylib__WEBPACK_IMPORTED_MODULE_1__["default"].getRandomFromTo(20, 25+atacked.score), 0);
         atacked.drawHealth();
         atacking.fire();
         atacked.hurt();
@@ -707,7 +717,9 @@ class Task{
     }
 
     generate(){
-        const tasks = [this.arithmetics, this.translate];
+        document.getElementById('tempMedia').innerHTML = '';
+        document.getElementById('answer').value = '';
+        const tasks = [this.arithmetics, this.translate, this.listening];
         const currentTask = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(tasks).bind(this);
         currentTask();
 
@@ -720,7 +732,7 @@ class Task{
         const operation = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(operations);
         this.condition = firstNumber + operation + secondNumber;
         this.solution.push(eval(this.condition).toString());
-        document.querySelector('.taskCondition').innerHTML = "solve the task:<br>" + this.condition;
+        document.querySelector('.taskDescription').innerHTML = "solve the task:<br>" + this.condition;
     }
 
     translate(){
@@ -729,7 +741,20 @@ class Task{
         this.condition = arrayOfWords[_mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, arrayOfWordsLength-1)];
         this.solution = _dict__WEBPACK_IMPORTED_MODULE_1__["dictTranslateTask"][this.condition];
 
-        document.querySelector('.taskCondition').innerHTML = "translate into russian:<br>" + this.condition;
+        document.querySelector('.taskDescription').innerHTML = "translate into russian:<br>" + this.condition;
+    }
+
+    listening(){
+        const arrayOfWords = Object.keys(_dict__WEBPACK_IMPORTED_MODULE_1__["dictListeningTask"]);
+        const arrayOfWordsLength = arrayOfWords.length;
+        this.condition = arrayOfWords[_mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, arrayOfWordsLength-1)];
+        this.solution.push(_dict__WEBPACK_IMPORTED_MODULE_1__["dictListeningTask"][this.condition]);
+
+        const insertingAudio = document.createElement("audio");
+        insertingAudio.setAttribute("src", this.condition);
+        insertingAudio.setAttribute("controls", "");
+        document.getElementById('tempMedia').appendChild(insertingAudio);
+        document.querySelector('.taskDescription').innerHTML = "type the word you heard";
     }
 
     isSolved(){
