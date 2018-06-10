@@ -56,6 +56,21 @@ class mylib{
         return array;
     }
 
+    /*shuffles elements in array*/
+    static shuffle(array) {
+        let currentIndex = array.length;
+        let tempValue;
+        let randIndex;
+        while (0 !== currentIndex) {
+            randIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            tempValue = array[currentIndex];
+            array[currentIndex] = array[randIndex];
+            array[randIndex] = tempValue;
+        }
+        return array;
+    }
+
 }
 
 export default mylib;

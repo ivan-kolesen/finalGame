@@ -31,11 +31,22 @@ class Game{
     }
 
     setAnswer(){
-        this.spell.task.answer = answer.value.toString();
+        if(this.spell.task.type === "sort"){
+            this.setSortAnswer();
+        }
+        this.spell.task.answer = document.getElementById('answer').value.toString();
         document.querySelector('.taskPage').style.display = "none";
         btnChooseSpell.removeEventListener('click', this.btnChooseSpell);
         this.spell.cast(this.player, this.monster);
         setTimeout(this.isAlive.bind(this), 2000);
+    }
+
+    setSortAnswer(){
+        const ul = document.querySelector('.sortable');
+        let ans = '';
+        Array.prototype.forEach.call(ul.children, (item) => {ans += item.innerText;});
+        document.getElementById('answer').value = ans;
+        document.getElementById('answer').style.display = "inline-block";
     }
 
     isAlive(){
@@ -62,7 +73,7 @@ class Game{
         this.player.score +=1;
         this.monster = new Monster(this.player.score);
         this.monster.drawMonster(this.player);
-        this.player.health = Math.min(this.player.health+mylib.getRandomFromTo(20, 25+this.player.score*5), this.player.startHealth);
+        this.player.health = Math.min(this.player.health+mylib.getRandomFromTo(10, 15+this.player.score), this.player.startHealth);
         this.player.drawHealth();
         btnChooseSpell.addEventListener('click', this.btnChooseSpell);
     }

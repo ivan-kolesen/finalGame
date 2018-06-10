@@ -32,11 +32,35 @@ export const dictTranslateTask = {
 };
 
 export const dictListeningTask = {
-    "audio/elephant.mp3" : "elephant",
-    "audio/forest.mp3" : "forest",
-    "audio/mushroom.mp3" : "mushroom",
-    "audio/ocean.mp3" : "ocean",
-    "audio/rainbow.mp3" : "rainbow",
-    "audio/strawberry.mp3" : "strawberry",
-    "audio/tomato.mp3" : "tomato"
+    "audio/listeningTask/elephant.mp3" : "elephant",
+    "audio/listeningTask/forest.mp3" : "forest",
+    "audio/listeningTask/mushroom.mp3" : "mushroom",
+    "audio/listeningTask/ocean.mp3" : "ocean",
+    "audio/listeningTask/rainbow.mp3" : "rainbow",
+    "audio/listeningTask/strawberry.mp3" : "strawberry",
+    "audio/listeningTask/tomato.mp3" : "tomato"
 };
+
+export const dictCapitalsTask = {
+    "img/capitalsTask/spain.jpg" : ["madrid"],
+    "img/capitalsTask/belarus.jpeg" : ["minsk"],
+    "img/capitalsTask/canada.jpg" : ["ottawa", "ottava"],
+    "img/capitalsTask/germany.jpg" : ["berlin"],
+    "img/capitalsTask/greatBritain.jpg" : ["london"],
+    "img/capitalsTask/italy.jpg" : ["rome", "rim"],
+    "img/capitalsTask/lithuania.jpg" : ["vilnius", "vilnus"],
+    "img/capitalsTask/sweden.jpg" : ["stockholm", "stokholm", "stokgolm"],
+    "img/capitalsTask/usa.png" : ["washington"]
+};
+
+export const dictSortTask = {
+    "wolf" : "wolf",
+    "bisycle" : "bisycle",
+    "clothes" : "clothes",
+    "apple" : "apple",
+    "violet" : "violet",
+    "coffee" : "coffee",
+    "market" : "market",
+    "mirror" : "mirror",
+    "rabbit" : "rabbit"
+}

@@ -90,7 +90,7 @@
 /*!********************!*\
   !*** ./js/dict.js ***!
   \********************/
-/*! exports provided: dictMonster, dictTranslateTask, dictListeningTask */
+/*! exports provided: dictMonster, dictTranslateTask, dictListeningTask, dictCapitalsTask, dictSortTask */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,6 +98,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictMonster", function() { return dictMonster; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictTranslateTask", function() { return dictTranslateTask; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictListeningTask", function() { return dictListeningTask; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictCapitalsTask", function() { return dictCapitalsTask; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictSortTask", function() { return dictSortTask; });
 const dictMonster = {
     "headsIdle" : ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'],
     "bodiesIdle" : ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'],
@@ -132,14 +134,38 @@ const dictTranslateTask = {
 };
 
 const dictListeningTask = {
-    "audio/elephant.mp3" : "elephant",
-    "audio/forest.mp3" : "forest",
-    "audio/mushroom.mp3" : "mushroom",
-    "audio/ocean.mp3" : "ocean",
-    "audio/rainbow.mp3" : "rainbow",
-    "audio/strawberry.mp3" : "strawberry",
-    "audio/tomato.mp3" : "tomato"
+    "audio/listeningTask/elephant.mp3" : "elephant",
+    "audio/listeningTask/forest.mp3" : "forest",
+    "audio/listeningTask/mushroom.mp3" : "mushroom",
+    "audio/listeningTask/ocean.mp3" : "ocean",
+    "audio/listeningTask/rainbow.mp3" : "rainbow",
+    "audio/listeningTask/strawberry.mp3" : "strawberry",
+    "audio/listeningTask/tomato.mp3" : "tomato"
 };
+
+const dictCapitalsTask = {
+    "img/capitalsTask/spain.jpg" : ["madrid"],
+    "img/capitalsTask/belarus.jpeg" : ["minsk"],
+    "img/capitalsTask/canada.jpg" : ["ottawa", "ottava"],
+    "img/capitalsTask/germany.jpg" : ["berlin"],
+    "img/capitalsTask/greatBritain.jpg" : ["london"],
+    "img/capitalsTask/italy.jpg" : ["rome", "rim"],
+    "img/capitalsTask/lithuania.jpg" : ["vilnius", "vilnus"],
+    "img/capitalsTask/sweden.jpg" : ["stockholm", "stokholm", "stokgolm"],
+    "img/capitalsTask/usa.png" : ["washington"]
+};
+
+const dictSortTask = {
+    "wolf" : "wolf",
+    "bisycle" : "bisycle",
+    "clothes" : "clothes",
+    "apple" : "apple",
+    "violet" : "violet",
+    "coffee" : "coffee",
+    "market" : "market",
+    "mirror" : "mirror",
+    "rabbit" : "rabbit"
+}
 
 
 /***/ }),
@@ -191,11 +217,22 @@ class Game{
     }
 
     setAnswer(){
-        this.spell.task.answer = answer.value.toString();
+        if(this.spell.task.type === "sort"){
+            this.setSortAnswer();
+        }
+        this.spell.task.answer = document.getElementById('answer').value.toString();
         document.querySelector('.taskPage').style.display = "none";
         btnChooseSpell.removeEventListener('click', this.btnChooseSpell);
         this.spell.cast(this.player, this.monster);
         setTimeout(this.isAlive.bind(this), 2000);
+    }
+
+    setSortAnswer(){
+        const ul = document.querySelector('.sortable');
+        let ans = '';
+        Array.prototype.forEach.call(ul.children, (item) => {ans += item.innerText;});
+        document.getElementById('answer').value = ans;
+        document.getElementById('answer').style.display = "inline-block";
     }
 
     isAlive(){
@@ -222,7 +259,7 @@ class Game{
         this.player.score +=1;
         this.monster = new _monster__WEBPACK_IMPORTED_MODULE_1__["default"](this.player.score);
         this.monster.drawMonster(this.player);
-        this.player.health = Math.min(this.player.health+_mylib__WEBPACK_IMPORTED_MODULE_3__["default"].getRandomFromTo(20, 25+this.player.score*5), this.player.startHealth);
+        this.player.health = Math.min(this.player.health+_mylib__WEBPACK_IMPORTED_MODULE_3__["default"].getRandomFromTo(10, 15+this.player.score), this.player.startHealth);
         this.player.drawHealth();
         btnChooseSpell.addEventListener('click', this.btnChooseSpell);
     }
@@ -531,6 +568,21 @@ class mylib{
         return array;
     }
 
+    /*shuffles elements in array*/
+    static shuffle(array) {
+        let currentIndex = array.length;
+        let tempValue;
+        let randIndex;
+        while (0 !== currentIndex) {
+            randIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            tempValue = array[currentIndex];
+            array[currentIndex] = array[randIndex];
+            array[randIndex] = tempValue;
+        }
+        return array;
+    }
+
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (mylib);
@@ -711,6 +763,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Task{
     constructor(){
+        this.type;
         this.condition;
         this.solution = [];
         this.answer;
@@ -719,13 +772,14 @@ class Task{
     generate(){
         document.getElementById('tempMedia').innerHTML = '';
         document.getElementById('answer').value = '';
-        const tasks = [this.arithmetics, this.translate, this.listening];
+        const tasks = [this.arithmetics, this.translate, this.listening, this.capitals, this.sort];
         const currentTask = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(tasks).bind(this);
         currentTask();
 
     }
 
     arithmetics(){
+        this.type = "arithmetics";
         const firstNumber = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, 100);
         const secondNumber = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, 100);
         const operations = ['+', '-', '*', '/'];
@@ -736,6 +790,7 @@ class Task{
     }
 
     translate(){
+        this.type = "translate";
         const arrayOfWords = Object.keys(_dict__WEBPACK_IMPORTED_MODULE_1__["dictTranslateTask"]);
         const arrayOfWordsLength = arrayOfWords.length;
         this.condition = arrayOfWords[_mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, arrayOfWordsLength-1)];
@@ -745,6 +800,7 @@ class Task{
     }
 
     listening(){
+        this.type = "listening";
         const arrayOfWords = Object.keys(_dict__WEBPACK_IMPORTED_MODULE_1__["dictListeningTask"]);
         const arrayOfWordsLength = arrayOfWords.length;
         this.condition = arrayOfWords[_mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, arrayOfWordsLength-1)];
@@ -756,6 +812,50 @@ class Task{
         document.getElementById('tempMedia').appendChild(insertingAudio);
         document.querySelector('.taskDescription').innerHTML = "type the word you heard";
     }
+
+    capitals(){
+        this.type = "capitals";
+        const arrayOfWords = Object.keys(_dict__WEBPACK_IMPORTED_MODULE_1__["dictCapitalsTask"]);
+        const arrayOfWordsLength = arrayOfWords.length;
+        this.condition = arrayOfWords[_mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, arrayOfWordsLength-1)];
+        this.solution = _dict__WEBPACK_IMPORTED_MODULE_1__["dictCapitalsTask"][this.condition];
+
+        const insertingFlag = document.createElement("img");
+        insertingFlag.setAttribute("src", this.condition);
+        document.getElementById('tempMedia').appendChild(insertingFlag);
+        document.querySelector('.taskDescription').innerHTML = "what is the capital of:";
+    }
+
+    sort(){
+        this.type = "sort";
+        document.getElementById('answer').style.display = "none";
+
+        const arrayOfWords = Object.keys(_dict__WEBPACK_IMPORTED_MODULE_1__["dictSortTask"]);
+        const arrayOfWordsLength = arrayOfWords.length;
+        this.condition = arrayOfWords[_mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, arrayOfWordsLength-1)];
+        this.solution.push(_dict__WEBPACK_IMPORTED_MODULE_1__["dictSortTask"][this.condition]);
+
+        const chosenWordShuffledArr = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].shuffle(this.condition.split(""));
+
+        const ul = document.createElement("ul");
+        ul.classList.add("sortable");
+
+        for(let i=0;i<chosenWordShuffledArr.length;i++){
+            const li = document.createElement("li");
+            li.innerHTML = chosenWordShuffledArr[i];
+            ul.appendChild(li);
+        }
+
+        document.getElementById('tempMedia').appendChild(ul);
+
+        $( function() {
+            $( ".sortable" ).sortable().disableSelection();
+        } );
+
+        document.querySelector('.taskDescription').innerHTML = "put the letters in the correct order:";
+    }
+
+
 
     isSolved(){
         return this.solution.indexOf(this.answer.toLowerCase()) > -1;

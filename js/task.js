@@ -1,8 +1,9 @@
 import mylib from "./mylib";
-import {dictTranslateTask, dictListeningTask} from "./dict";
+import {dictTranslateTask, dictListeningTask, dictCapitalsTask, dictSortTask} from "./dict";
 
 class Task{
     constructor(){
+        this.type;
         this.condition;
         this.solution = [];
         this.answer;
@@ -11,13 +12,14 @@ class Task{
     generate(){
         document.getElementById('tempMedia').innerHTML = '';
         document.getElementById('answer').value = '';
-        const tasks = [this.arithmetics, this.translate, this.listening];
+        const tasks = [this.arithmetics, this.translate, this.listening, this.capitals, this.sort];
         const currentTask = mylib.getRandomArrayElement(tasks).bind(this);
         currentTask();
 
     }
 
     arithmetics(){
+        this.type = "arithmetics";
         const firstNumber = mylib.getRandomFromTo(0, 100);
         const secondNumber = mylib.getRandomFromTo(0, 100);
         const operations = ['+', '-', '*', '/'];
@@ -28,6 +30,7 @@ class Task{
     }
 
     translate(){
+        this.type = "translate";
         const arrayOfWords = Object.keys(dictTranslateTask);
         const arrayOfWordsLength = arrayOfWords.length;
         this.condition = arrayOfWords[mylib.getRandomFromTo(0, arrayOfWordsLength-1)];
@@ -37,6 +40,7 @@ class Task{
     }
 
     listening(){
+        this.type = "listening";
         const arrayOfWords = Object.keys(dictListeningTask);
         const arrayOfWordsLength = arrayOfWords.length;
         this.condition = arrayOfWords[mylib.getRandomFromTo(0, arrayOfWordsLength-1)];
@@ -48,6 +52,50 @@ class Task{
         document.getElementById('tempMedia').appendChild(insertingAudio);
         document.querySelector('.taskDescription').innerHTML = "type the word you heard";
     }
+
+    capitals(){
+        this.type = "capitals";
+        const arrayOfWords = Object.keys(dictCapitalsTask);
+        const arrayOfWordsLength = arrayOfWords.length;
+        this.condition = arrayOfWords[mylib.getRandomFromTo(0, arrayOfWordsLength-1)];
+        this.solution = dictCapitalsTask[this.condition];
+
+        const insertingFlag = document.createElement("img");
+        insertingFlag.setAttribute("src", this.condition);
+        document.getElementById('tempMedia').appendChild(insertingFlag);
+        document.querySelector('.taskDescription').innerHTML = "what is the capital of:";
+    }
+
+    sort(){
+        this.type = "sort";
+        document.getElementById('answer').style.display = "none";
+
+        const arrayOfWords = Object.keys(dictSortTask);
+        const arrayOfWordsLength = arrayOfWords.length;
+        this.condition = arrayOfWords[mylib.getRandomFromTo(0, arrayOfWordsLength-1)];
+        this.solution.push(dictSortTask[this.condition]);
+
+        const chosenWordShuffledArr = mylib.shuffle(this.condition.split(""));
+
+        const ul = document.createElement("ul");
+        ul.classList.add("sortable");
+
+        for(let i=0;i<chosenWordShuffledArr.length;i++){
+            const li = document.createElement("li");
+            li.innerHTML = chosenWordShuffledArr[i];
+            ul.appendChild(li);
+        }
+
+        document.getElementById('tempMedia').appendChild(ul);
+
+        $( function() {
+            $( ".sortable" ).sortable().disableSelection();
+        } );
+
+        document.querySelector('.taskDescription').innerHTML = "put the letters in the correct order:";
+    }
+
+
 
     isSolved(){
         return this.solution.indexOf(this.answer.toLowerCase()) > -1;
