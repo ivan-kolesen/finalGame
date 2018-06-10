@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="styles/gameStyle.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <title>Game</title>
 </head>
 <body>
   <section class="regPage">
     <h2>PLAY THE GAME!</h2>
-    <form onsubmit="return false">
+    <form onsubmit="return false;">
       <label>NAME:</label>
-      <input id="playerName" type="text" placeholder="*your name" value="ivan" required>
+      <input id="playerName" type="text" placeholder="*your name" required>
       <button id="btnStart" type="submit">START!</button>
     </form>
   </section>
@@ -27,26 +29,45 @@
         <div class="monsterHealthRemain"></div>
       </div>
     </div>
+    <h2 class="round">ROUND 1</h2>
     <form>
       <button id="btnChooseSpell" type="button">Choose spell!</button>
     </form>
-    <div class="playerImage"></div>
-    <div class="monsterImage"></div>
+    <div class="spritePlayer spritePlayerIdle"></div>
+    <div class="spriteMonster">
+      <div class="spriteMonsterHeadIdle"></div>
+      <div class="spriteMonsterBodyIdle"></div>
+      <div class="spriteMonsterLegsIdle"></div>
+    </div>
   </section>
   <section class="scoresPage">
+    <table>
+      <tr>
+        <th>Player</th>
+        <th>Score</th>
+      </tr>
+    </table>
+    <!--<button id="btnNewGame" type="button">NEW GAME!</button>-->
   </section>
   <section class="spellPage">
-        <img id="swordSpell" class="spellType" src="img/sword.png">
-        <img id="medicineSpell" class="spellType" src="img/heal.png">
+    <div class="modalWindow modalWindow__spell">
+      <h2 class="spellHeader">Choose the spell</h2>
+      <div class="spells">
+        <img id="atackSpell" class="spellType" src="img/sword.png">
+        <img id="healSpell" class="spellType" src="img/heal.png">
+      </div>
+    </div>
   </section>
   <section class="taskPage">
-    <h2 class="taskCondition"></h2>
-    <form onsubmit="return false">
-      <label>answer:</label>
-      <input id="answer" type="text" placeholder="your answer">
-      <button id="btnAnswer" type="submit">ANSWER!</button>
-    </form>
+    <div class="modalWindow modalWindow__task">
+      <h2 class="taskDescription"></h2>
+      <div id="tempMedia"></div>
+      <form onsubmit="return false;">
+        <input id="answer" type="text" placeholder="your answer">
+        <button id="btnAnswer" type="submit">ANSWER!</button>
+      </form>
+    </div>
   </section>
-  <script src="js/game.js"></script>
+  <script src="dist/boundle.js"></script>
 </body>
 </html>
