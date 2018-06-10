@@ -90,7 +90,7 @@
 /*!********************!*\
   !*** ./js/dict.js ***!
   \********************/
-/*! exports provided: dictMonster, dictTranslateTask, dictListeningTask, dictCapitalsTask, dictSortTask */
+/*! exports provided: dictMonster, dictTranslateTask, dictListeningTask, dictCapitalsTask, dictSortTask, dictRedundantTask */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,6 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictListeningTask", function() { return dictListeningTask; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictCapitalsTask", function() { return dictCapitalsTask; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictSortTask", function() { return dictSortTask; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dictRedundantTask", function() { return dictRedundantTask; });
 const dictMonster = {
     "headsIdle" : ['spriteMonsterHeadIdle_first', 'spriteMonsterHeadIdle_second','spriteMonsterHeadIdle_third'],
     "bodiesIdle" : ['spriteMonsterBodyIdle_first', 'spriteMonsterBodyIdle_second','spriteMonsterBodyIdle_third'],
@@ -156,15 +157,19 @@ const dictCapitalsTask = {
 };
 
 const dictSortTask = {
-    "wolf" : "wolf",
-    "bisycle" : "bisycle",
-    "clothes" : "clothes",
-    "apple" : "apple",
-    "violet" : "violet",
-    "coffee" : "coffee",
-    "market" : "market",
-    "mirror" : "mirror",
-    "rabbit" : "rabbit"
+    "wolf" : ["wolf", "flow"],
+    "bisycle" : ["bisycle"],
+    "clothes" : ["clothes"],
+    "apple" : ["apple"],
+    "violet" : ["violet"],
+    "coffee" : ["coffee"],
+    "market" : ["market"],
+    "mirror" : ["mirror"],
+    "rabbit" : ["rabbit"]
+};
+
+const dictRedundantTask = {
+    "img/capitalsTask/canada.jpg" : ["img/capitalsTask/canada.jpg", "img/capitalsTask/spain.jpg", "img/capitalsTask/italy.jpg"]
 }
 
 
@@ -833,7 +838,7 @@ class Task{
         const arrayOfWords = Object.keys(_dict__WEBPACK_IMPORTED_MODULE_1__["dictSortTask"]);
         const arrayOfWordsLength = arrayOfWords.length;
         this.condition = arrayOfWords[_mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, arrayOfWordsLength-1)];
-        this.solution.push(_dict__WEBPACK_IMPORTED_MODULE_1__["dictSortTask"][this.condition]);
+        this.solution = _dict__WEBPACK_IMPORTED_MODULE_1__["dictSortTask"][this.condition];
 
         const chosenWordShuffledArr = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].shuffle(this.condition.split(""));
 
@@ -849,10 +854,36 @@ class Task{
         document.getElementById('tempMedia').appendChild(ul);
 
         $( function() {
-            $( ".sortable" ).sortable().disableSelection();
+            $(".sortable").sortable().disableSelection();
         } );
 
         document.querySelector('.taskDescription').innerHTML = "put the letters in the correct order:";
+    }
+
+    redundant(){
+        this.type = "redundant";
+        document.getElementById('answer').style.display = "none";
+
+        const arrayOfWords = Object.keys(_dict__WEBPACK_IMPORTED_MODULE_1__["dictRedundantTask"]);
+        const arrayOfWordsLength = arrayOfWords.length;
+        this.solution.push(arrayOfWords[_mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomFromTo(0, arrayOfWordsLength-1)]);
+        this.condition = _dict__WEBPACK_IMPORTED_MODULE_1__["dictRedundantTask"][this.solution];
+
+        const media = document.getElementById('tempMedia');
+        for(let i = 0; i < 3; i++){
+            const label = document.createElement("label");
+            const input = document.createElement("input");
+            input.setAttribute("type", "radio");
+            input.setAttribute("name", "redundantPic")
+            input.setAttribute("value", i.toString());
+            const img = document.createElement("img");
+            img.setAttribute("src", this.condition[i]);
+            label.appendChild(input);
+            label.appendChild(img);
+            media.appendChild(label);
+        }
+
+        document.querySelector('.taskDescription').innerHTML = "choose the redundant picture:";
     }
 
 

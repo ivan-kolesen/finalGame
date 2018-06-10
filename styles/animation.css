@@ -1,0 +1,279 @@
+.arena1{background-image: url("../img/arena1.jpg");}
+.arena2{background-image: url("../img/arena2.png");}
+.arena3{background-image: url("../img/arena3.png");}
+.arena4{background-image: url("../img/arena4.png");}
+
+.spritePlayer{
+	position: absolute;
+	left: 10vw;
+	top: 50vh;
+	width: 330px;
+	height: 250px;
+	transform: scale(1.5);
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spritePlayerIdle {
+	background: url(../img/spritePlayer.png) no-repeat 0 0;
+	-webkit-animation-name: sprite8Frames;
+}
+
+.spritePlayerFire {
+	background: url(../img/spritePlayerFire.png) no-repeat 0 0;
+	-webkit-animation-name: sprite5Frames;
+}
+
+.spritePlayerHeal {
+	background: url(../img/spritePlayerHeal1.png) no-repeat 0 0;
+	-webkit-animation-name: sprite5Frames;
+
+}
+
+.spritePlayerHurt {
+	background: url(../img/spritePlayerHurt.png) no-repeat 0 0;
+	-webkit-animation-name: sprite6Frames;
+}
+
+.spritePlayerDie
+{
+	background: url(../img/spritePlayerDie.png) no-repeat 0 0;
+	-webkit-animation-name: sprite7Frames;
+}
+
+
+.spriteMonster{
+	position: absolute;
+	right: 10vw;
+	top: 50vh;
+	width: 330px;
+	transform: scale(1.5);
+}
+
+.spriteMonster > div{
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+.spriteMonsterHeadIdle {
+	height: 101px;
+	-webkit-animation-name: sprite8Frames;
+}
+
+.spriteMonsterBodyIdle {
+	height: 100px;
+	-webkit-animation-name: sprite8Frames;
+}
+
+.spriteMonsterLegsIdle {
+	height: 49px;
+	-webkit-animation-name: sprite8Frames;
+}
+
+.spriteMonsterHeadFire {
+	height: 101px;
+	-webkit-animation-name: sprite5Frames;
+}
+
+.spriteMonsterBodyFire {
+	height: 102px;
+	-webkit-animation-name: sprite5Frames;
+}
+
+.spriteMonsterLegsFire {
+	height: 47px;
+	-webkit-animation-name: sprite5Frames;
+}
+
+.spriteMonsterHeadHurt {
+	height: 96px;
+	-webkit-animation-name: sprite6Frames;
+}
+
+.spriteMonsterBodyHurt {
+	height: 103px;
+	-webkit-animation-name: sprite6Frames;
+}
+
+.spriteMonsterLegsHurt {
+	height: 49px;
+	-webkit-animation-name: sprite6Frames;
+}
+
+.spriteMonsterHeadDie {
+	margin-bottom: -1px;
+	height: 98px;
+	-webkit-animation-name: sprite20Frames;
+	-webkit-animation-duration: 2000ms !important;
+	-webkit-animation-iteration-count: 1 !important;
+}
+
+.spriteMonsterBodyDie {
+	height: 108px;
+	-webkit-animation-name: sprite20Frames;
+	-webkit-animation-duration: 2000ms !important;
+	-webkit-animation-iteration-count: 1 !important;
+}
+
+.spriteMonsterLegsDie {
+	margin-top: -2px;
+	height: 47px;
+	-webkit-animation-name: sprite20Frames;
+	-webkit-animation-duration: 2000ms !important;
+	-webkit-animation-iteration-count: 1 !important;
+}
+
+
+.spriteMonsterHeadIdle_first{ background: url(../img/monster/idle/heads/monsterHeadIdle1.png) no-repeat 0 0;}
+.spriteMonsterHeadIdle_second{ background: url(../img/monster/idle/heads/monsterHeadIdle2.png) no-repeat 0 0;}
+.spriteMonsterHeadIdle_third{ background: url(../img/monster/idle/heads/monsterHeadIdle3.png) no-repeat 0 0;}
+.spriteMonsterBodyIdle_first{ background: url(../img/monster/idle/bodies/monsterBodyIdle1.png) no-repeat 0 0;}
+.spriteMonsterBodyIdle_second{ background: url(../img/monster/idle/bodies/monsterBodyIdle2.png) no-repeat 0 0;}
+.spriteMonsterBodyIdle_third{ background: url(../img/monster/idle/bodies/monsterBodyIdle3.png) no-repeat 0 0;}
+.spriteMonsterLegsIdle_first{ background: url(../img/monster/idle/legs/monsterLegsIdle1.png) no-repeat 0 0;}
+.spriteMonsterLegsIdle_second{ background: url(../img/monster/idle/legs/monsterLegsIdle2.png) no-repeat 0 0;}
+.spriteMonsterLegsIdle_third{ background: url(../img/monster/idle/legs/monsterLegsIdle3.png) no-repeat 0 0;}
+
+.spriteMonsterHeadFire_first{ background: url(../img/monster/fire/head/monsterHeadFire1.png) no-repeat 0 0;}
+.spriteMonsterHeadFire_second{ background: url(../img/monster/fire/head/monsterHeadFire2.png) no-repeat 0 0;}
+.spriteMonsterHeadFire_third{ background: url(../img/monster/fire/head/monsterHeadFire3.png) no-repeat 0 0;}
+.spriteMonsterBodyFire_first{ background: url(../img/monster/fire/body/monsterBodyFire1.png) no-repeat 0 0;}
+.spriteMonsterBodyFire_second{ background: url(../img/monster/fire/body/monsterBodyFire2.png) no-repeat 0 0;}
+.spriteMonsterBodyFire_third{ background: url(../img/monster/fire/body/monsterBodyFire3.png) no-repeat 0 0;}
+.spriteMonsterLegsFire_first{ background: url(../img/monster/fire/legs/monsterLegsFire1.png) no-repeat 0 0;}
+.spriteMonsterLegsFire_second{ background: url(../img/monster/fire/legs/monsterLegsFire2.png) no-repeat 0 0;}
+.spriteMonsterLegsFire_third{ background: url(../img/monster/fire/legs/monsterLegsFire3.png) no-repeat 0 0;}
+
+.spriteMonsterHeadHurt_first{ background: url(../img/monster/hurt/head/monsterHeadHurt1.png) no-repeat 0 0;}
+.spriteMonsterHeadHurt_second{ background: url(../img/monster/hurt/head/monsterHeadHurt2.png) no-repeat 0 0;}
+.spriteMonsterHeadHurt_third{ background: url(../img/monster/hurt/head/monsterHeadHurt3.png) no-repeat 0 0;}
+.spriteMonsterBodyHurt_first{ background: url(../img/monster/hurt/body/monsterBodyHurt1.png) no-repeat 0 0;}
+.spriteMonsterBodyHurt_second{ background: url(../img/monster/hurt/body/monsterBodyHurt2.png) no-repeat 0 0;}
+.spriteMonsterBodyHurt_third{ background: url(../img/monster/hurt/body/monsterBodyHurt3.png) no-repeat 0 0;}
+.spriteMonsterLegsHurt_first{ background: url(../img/monster/hurt/legs/monsterLegsHurt1.png) no-repeat 0 0;}
+.spriteMonsterLegsHurt_second{ background: url(../img/monster/hurt/legs/monsterLegsHurt2.png) no-repeat 0 0;}
+.spriteMonsterLegsHurt_third{ background: url(../img/monster/hurt/legs/monsterLegsHurt3.png) no-repeat 0 0;}
+
+.spriteMonsterHeadDie_first{ background: url(../img/monster/die/head/monsterHeadDie1.png) no-repeat 0 0;}
+.spriteMonsterHeadDie_second{ background: url(../img/monster/die/head/monsterHeadDie2.png) no-repeat 0 0;}
+.spriteMonsterHeadDie_third{ background: url(../img/monster/die/head/monsterHeadDie3.png) no-repeat 0 0;}
+.spriteMonsterBodyDie_first{ background: url(../img/monster/die/body/monsterBodyDie1.png) no-repeat 0 0;}
+.spriteMonsterBodyDie_second{ background: url(../img/monster/die/body/monsterBodyDie2.png) no-repeat 0 0;}
+.spriteMonsterBodyDie_third{ background: url(../img/monster/die/body/monsterBodyDie3.png) no-repeat 0 0;}
+.spriteMonsterLegsDie_first{ background: url(../img/monster/die/legs/monsterLegsDie1.png) no-repeat 0 0;}
+.spriteMonsterLegsDie_second{ background: url(../img/monster/die/legs/monsterLegsDie2.png) no-repeat 0 0;}
+.spriteMonsterLegsDie_third{ background: url(../img/monster/die/legs/monsterLegsDie3.png) no-repeat 0 0;}
+
+
+@-webkit-keyframes sprite5Frames {
+	0% {background-position: 0 0;}
+	20% {background-position: 0 0;}
+	20.001% {background-position: -330px 0;}
+	40% {background-position: -330px 0;}
+	40.001% {background-position: -660px 0;}
+	60% {background-position: -660px 0;}
+	60.001% {background-position: -990px 0;}
+	80% {background-position: -990px 0;}
+	80.001% {background-position: -1320px 0;}
+	99.999% {background-position: -1320px 0;}
+	100% {background-position: 0 0;}
+}
+
+@-webkit-keyframes sprite6Frames {
+	0% {background-position: 0 0;}
+	16% {background-position: 0 0;}
+	16.001% {background-position: -330px 0;}
+	33% {background-position: -330px 0;}
+	33.001% {background-position: -660px 0;}
+	49.999% {background-position: -660px 0;}
+	50% {background-position: -990px 0;}
+	66% {background-position: -990px 0;}
+	66.001% {background-position: -1320px 0;}
+	83% {background-position: -1320px 0;}
+	83.001% {background-position: -1650px 0;}
+	99.999% {background-position: -1650px 0;}
+	100% {background-position: 0 0;}
+}
+
+@-webkit-keyframes sprite7Frames {
+	0% {background-position: 0 0;}
+	14.285% {background-position: 0 0;}
+	14.286% {background-position: -330px 0;}
+	28.571% {background-position: -330px 0;}
+	28.572% {background-position: -660px 0;}
+	42.856% {background-position: -660px 0;}
+	42.857% {background-position: -990px 0;}
+	57.141% {background-position: -990px 0;}
+	57.142% {background-position: -1320px 0;}
+	71.426% {background-position: -1320px 0;}
+	71.427% {background-position: -1650px 0;}
+	85.711% {background-position: -1650px 0;}
+	85.712% {background-position: -1980px 0;}
+	99.999% {background-position: -1980px 0;}
+	100% {background-position: 0 0;}
+}
+
+@-webkit-keyframes sprite8Frames {
+	0% {background-position: 0 0;}
+	12.5% {background-position: 0 0;}
+	12.501% {background-position: -330px 0;}
+	25% {background-position: -330px 0;}
+	25.001% {background-position: -660px 0;}
+	37.5% {background-position: -660px 0;}
+	37.501% {background-position: -990px 0;}
+	50% {background-position: -990px 0;}
+	50.001% {background-position: -1320px 0;}
+	62.5% {background-position: -1320px 0;}
+	62.501% {background-position: -1650px 0;}
+	75% {background-position: -1650px 0;}
+	75.001% {background-position: -1980px 0;}
+	87.5% {background-position: -1980px 0;}
+	87.501% {background-position: -2310px 0;}
+	99.999% {background-position: -2310px 0;}
+	100% {background-position: 0 0;}
+}
+
+@-webkit-keyframes sprite20Frames {
+	0% {background-position: 0 0;}
+	5% {background-position: 0 0;}
+	5.001% {background-position: -330px 0;}
+	10% {background-position: -330px 0;}
+	10.001% {background-position: -660px 0;}
+	15% {background-position: -660px 0;}
+	15.001% {background-position: -990px 0;}
+	20% {background-position: -990px 0;}
+	20.001% {background-position: -1320px 0;}
+	25% {background-position: -1320px 0;}
+	25.001% {background-position: -1650px 0;}
+	30% {background-position: -1650px 0;}
+	30.001% {background-position: -1980px 0;}
+	35% {background-position: -1980px 0;}
+	35.001% {background-position: -2310px 0;}
+	40% {background-position: -2310px 0;}
+	40.001% {background-position: -2640px 0;}
+	45% {background-position: -2640px 0;}
+	45.001% {background-position: -2970px 0;}
+	50% {background-position: -2970px 0;}
+	50.001% {background-position: -3300px 0;}
+	55% {background-position: -3300px 0;}
+	55.001% {background-position: -3630px 0;}
+	60% {background-position: -3630px 0;}
+	60.001% {background-position: -3960px 0;}
+	65% {background-position: -3960px 0;}
+	65.001% {background-position: -4290px 0;}
+	70% {background-position: -4290px 0;}
+	70.001% {background-position: -4620px 0;}
+	75% {background-position: -4620px 0;}
+	75.001% {background-position: -4950px 0;}
+	80% {background-position: -4950px 0;}
+	80.001% {background-position: -5280px 0;}
+	85% {background-position: -5280px 0;}
+	85.001% {background-position: -5610px 0;}
+	90% {background-position: -5610px 0;}
+	90.001% {background-position: -5940px 0;}
+	95% {background-position: -5940px 0;}
+	95.001% {background-position: -6270px 0;}
+	100% {background-position: -6270px 0;}
+}

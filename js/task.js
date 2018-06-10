@@ -1,5 +1,5 @@
 import mylib from "./mylib";
-import {dictTranslateTask, dictListeningTask, dictCapitalsTask, dictSortTask} from "./dict";
+import {dictTranslateTask, dictListeningTask, dictCapitalsTask, dictSortTask, dictRedundantTask} from "./dict";
 
 class Task{
     constructor(){
@@ -73,7 +73,7 @@ class Task{
         const arrayOfWords = Object.keys(dictSortTask);
         const arrayOfWordsLength = arrayOfWords.length;
         this.condition = arrayOfWords[mylib.getRandomFromTo(0, arrayOfWordsLength-1)];
-        this.solution.push(dictSortTask[this.condition]);
+        this.solution = dictSortTask[this.condition];
 
         const chosenWordShuffledArr = mylib.shuffle(this.condition.split(""));
 
@@ -89,10 +89,36 @@ class Task{
         document.getElementById('tempMedia').appendChild(ul);
 
         $( function() {
-            $( ".sortable" ).sortable().disableSelection();
+            $(".sortable").sortable().disableSelection();
         } );
 
         document.querySelector('.taskDescription').innerHTML = "put the letters in the correct order:";
+    }
+
+    redundant(){
+        this.type = "redundant";
+        document.getElementById('answer').style.display = "none";
+
+        const arrayOfWords = Object.keys(dictRedundantTask);
+        const arrayOfWordsLength = arrayOfWords.length;
+        this.solution.push(arrayOfWords[mylib.getRandomFromTo(0, arrayOfWordsLength-1)]);
+        this.condition = dictRedundantTask[this.solution];
+
+        const media = document.getElementById('tempMedia');
+        for(let i = 0; i < 3; i++){
+            const label = document.createElement("label");
+            const input = document.createElement("input");
+            input.setAttribute("type", "radio");
+            input.setAttribute("name", "redundantPic")
+            input.setAttribute("value", i.toString());
+            const img = document.createElement("img");
+            img.setAttribute("src", this.condition[i]);
+            label.appendChild(input);
+            label.appendChild(img);
+            media.appendChild(label);
+        }
+
+        document.querySelector('.taskDescription').innerHTML = "choose the redundant picture:";
     }
 
 

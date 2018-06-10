@@ -54,13 +54,17 @@ export const dictCapitalsTask = {
 };
 
 export const dictSortTask = {
-    "wolf" : "wolf",
-    "bisycle" : "bisycle",
-    "clothes" : "clothes",
-    "apple" : "apple",
-    "violet" : "violet",
-    "coffee" : "coffee",
-    "market" : "market",
-    "mirror" : "mirror",
-    "rabbit" : "rabbit"
+    "wolf" : ["wolf", "flow"],
+    "bisycle" : ["bisycle"],
+    "clothes" : ["clothes"],
+    "apple" : ["apple"],
+    "violet" : ["violet"],
+    "coffee" : ["coffee"],
+    "market" : ["market"],
+    "mirror" : ["mirror"],
+    "rabbit" : ["rabbit"]
+};
+
+export const dictRedundantTask = {
+    "img/capitalsTask/canada.jpg" : ["img/capitalsTask/canada.jpg", "img/capitalsTask/spain.jpg", "img/capitalsTask/italy.jpg"]
 }
