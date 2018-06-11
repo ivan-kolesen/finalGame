@@ -169,8 +169,8 @@ const dictSortTask = {
 };
 
 const dictRedundantTask = {
-    "img/capitalsTask/canada.jpg" : ["img/capitalsTask/canada.jpg", "img/capitalsTask/spain.jpg", "img/capitalsTask/italy.jpg"]
-}
+    "img/capitalstask/canada.jpg": ["img/capitalstask/canada.jpg", "img/capitalstask/spain.jpg", "img/capitalstask/italy.jpg"]
+};
 
 
 /***/ }),
@@ -225,6 +225,9 @@ class Game{
         if(this.spell.task.type === "sort"){
             this.setSortAnswer();
         }
+        if(this.spell.task.type === "redundant"){
+            this.setRedudantAnswer();
+        }
         this.spell.task.answer = document.getElementById('answer').value.toString();
         document.querySelector('.taskPage').style.display = "none";
         btnChooseSpell.removeEventListener('click', this.btnChooseSpell);
@@ -237,6 +240,13 @@ class Game{
         let ans = '';
         Array.prototype.forEach.call(ul.children, (item) => {ans += item.innerText;});
         document.getElementById('answer').value = ans;
+        document.getElementById('answer').style.display = "inline-block";
+    }
+
+    setRedudantAnswer(){
+        const arrayOfInputs = document.querySelectorAll('input[type="radio"]');
+        const chosenInput = Array.prototype.filter.call(arrayOfInputs, i => i.checked)[0].value;
+        document.getElementById('answer').value = chosenInput;
         document.getElementById('answer').style.display = "inline-block";
     }
 
@@ -777,7 +787,7 @@ class Task{
     generate(){
         document.getElementById('tempMedia').innerHTML = '';
         document.getElementById('answer').value = '';
-        const tasks = [this.arithmetics, this.translate, this.listening, this.capitals, this.sort];
+        const tasks = [this.arithmetics, this.translate, this.listening, this.capitals, this.sort, this.redundant];
         const currentTask = _mylib__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomArrayElement(tasks).bind(this);
         currentTask();
 
@@ -874,8 +884,8 @@ class Task{
             const label = document.createElement("label");
             const input = document.createElement("input");
             input.setAttribute("type", "radio");
-            input.setAttribute("name", "redundantPic")
-            input.setAttribute("value", i.toString());
+            input.setAttribute("name", "redundantPic");
+            input.setAttribute("value", this.condition[i]);
             const img = document.createElement("img");
             img.setAttribute("src", this.condition[i]);
             label.appendChild(input);

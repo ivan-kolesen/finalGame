@@ -66,5 +66,5 @@ export const dictSortTask = {
 };
 
 export const dictRedundantTask = {
-    "img/capitalsTask/canada.jpg" : ["img/capitalsTask/canada.jpg", "img/capitalsTask/spain.jpg", "img/capitalsTask/italy.jpg"]
-}
+    "img/capitalstask/canada.jpg": ["img/capitalstask/canada.jpg", "img/capitalstask/spain.jpg", "img/capitalstask/italy.jpg"]
+};

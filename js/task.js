@@ -12,7 +12,7 @@ class Task{
     generate(){
         document.getElementById('tempMedia').innerHTML = '';
         document.getElementById('answer').value = '';
-        const tasks = [this.arithmetics, this.translate, this.listening, this.capitals, this.sort];
+        const tasks = [this.arithmetics, this.translate, this.listening, this.capitals, this.sort, this.redundant];
         const currentTask = mylib.getRandomArrayElement(tasks).bind(this);
         currentTask();
 
@@ -109,8 +109,8 @@ class Task{
             const label = document.createElement("label");
             const input = document.createElement("input");
             input.setAttribute("type", "radio");
-            input.setAttribute("name", "redundantPic")
-            input.setAttribute("value", i.toString());
+            input.setAttribute("name", "redundantPic");
+            input.setAttribute("value", this.condition[i]);
             const img = document.createElement("img");
             img.setAttribute("src", this.condition[i]);
             label.appendChild(input);

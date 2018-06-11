@@ -70,12 +70,13 @@ section{
 
 .modalWindow__spell{
 	top: 30vh;
-	left: 35.5vw;
+	left: 34vw;
 }
 
 .modalWindow__task{
-	top: 30vh;
-	left: 30vw;
+	top: 20vh;
+	left: 26.5vw;
+	width: 600px;
 }
 
 .spellHeader{
@@ -242,7 +243,9 @@ label > input{
 }
 label > input + img{
 	cursor:pointer;
+	width: 100px;
+	margin: 3px;
 }
 label > input:checked + img{
-	border: #90ee90 3px solid;
+	border: #90ee90 2px solid;
 }

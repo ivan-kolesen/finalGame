@@ -34,6 +34,9 @@ class Game{
         if(this.spell.task.type === "sort"){
             this.setSortAnswer();
         }
+        if(this.spell.task.type === "redundant"){
+            this.setRedudantAnswer();
+        }
         this.spell.task.answer = document.getElementById('answer').value.toString();
         document.querySelector('.taskPage').style.display = "none";
         btnChooseSpell.removeEventListener('click', this.btnChooseSpell);
@@ -46,6 +49,13 @@ class Game{
         let ans = '';
         Array.prototype.forEach.call(ul.children, (item) => {ans += item.innerText;});
         document.getElementById('answer').value = ans;
+        document.getElementById('answer').style.display = "inline-block";
+    }
+
+    setRedudantAnswer(){
+        const arrayOfInputs = document.querySelectorAll('input[type="radio"]');
+        const chosenInput = Array.prototype.filter.call(arrayOfInputs, i => i.checked)[0].value;
+        document.getElementById('answer').value = chosenInput;
         document.getElementById('answer').style.display = "inline-block";
     }
 
